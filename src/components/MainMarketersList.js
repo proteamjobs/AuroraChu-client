@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./styles.css";
 
 class MainMarketersList extends Component {
   state = {
@@ -23,8 +24,19 @@ class MainMarketersList extends Component {
   render() {
     if (this.state.marketersList.length !== 0) {
       return (
-        <div>
-          <div>MainMarketersList Page</div>
+        <div className="marketerList">
+          {this.state.marketersList.map(item => {
+            return (
+              <div key={item.marketer_id}>
+                <div>
+                  <img style={{ width: 30, height: 30 }} src={item.image_url} />
+                </div>
+                <div>{item.user_name}</div>
+                <div>{item.title}</div>
+                <div>판매량 : {item.number_of_sales}</div>
+              </div>
+            );
+          })}
         </div>
       );
     } else {

@@ -1,0 +1,4 @@
+.marketerList {
+  display: flex;
+  flex-direction: row;
+}
