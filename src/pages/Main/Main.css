@@ -1,0 +1,40 @@
+.main {
+  display: flex;
+  height: 95vh;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.header {
+  display: block;
+  text-align: center;
+  background-color: gray;
+}
+
+.main_banner {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+  height: 300px;
+  border: 1px solid gray;
+  margin-top: 50px;
+}
+
+.main_banner_text {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute;
+    top: 50%; */
+}
+
+.footer {
+  display: block;
+  text-align: center;
+  background-color: gray;
+}
