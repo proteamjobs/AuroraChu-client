@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
+import SignupForm from "./SignupForm";
 
-class Signup extends Component {
-  render() {
-    return <div>Signup Page</div>;
-  }
+function Signup({ history }) {
+  return (
+    <div>
+      <h2>회원가입</h2>
+      <SignupForm history={history} />
+    </div>
+  );
 }
 
 export default Signup;
