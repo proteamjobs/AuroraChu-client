@@ -5,9 +5,9 @@ import MainMarketersList from "../../components/MainMarketersList";
 import "./Main.css";
 
 import Store from "../../mobx/signinStore";
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 
-// @observer
+@observer
 class Main extends Component {
   render() {
     return (
