@@ -4,6 +4,10 @@ import Footer from "../../components/Footer";
 import MainMarketersList from "../../components/MainMarketersList";
 import "./Main.css";
 
+import Store from "../../mobx/signinStore";
+import { observer, inject } from "mobx-react";
+
+// @observer
 class Main extends Component {
   render() {
     return (
