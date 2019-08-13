@@ -1,0 +1,38 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0px auto;
+  padding: 24px 100px;
+  border: 0.5px solid #dddddd;
+  border-radius: 5px;
+}
+
+.id-password-form {
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid #dddddd;
+}
+
+.agreement-form-item {
+  margin-bottom: 6px;
+}
+
+.signup-form-button {
+  width: 100%;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+}
