@@ -1,12 +1,15 @@
 import React from "react";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 import SignupForm from "./SignupForm";
 
 function Signup({ history }) {
   return (
-    <div>
-      <h2>회원가입</h2>
+    <>
+      <Header />
       <SignupForm history={history} />
-    </div>
+      <Footer />
+    </>
   );
 }
 

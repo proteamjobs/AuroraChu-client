@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Main from "./pages/Main/Main";
-import Signin from "./pages/Oauth/Signin/Signin";
-import Signup from "./pages/Oauth/Signup/Signup";
-import NotMatch from "./pages/NotMatch/NotMatch";
+import Main from "./pages/Main";
+import Signin from "./pages/Oauth/Signin";
+import Signup from "./pages/Oauth/Signup";
+import NotMatch from "./pages/NotMatch";
 
 function App() {
   return (
