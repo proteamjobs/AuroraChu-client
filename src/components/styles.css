@@ -15,3 +15,13 @@
   /* padding: 10px; */
   border: 1px solid gray;
 }
+
+.header {
+  display: flex;
+  background-color: #f8f8f8;
+  width: 100vh;
+  height: 80px;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+}

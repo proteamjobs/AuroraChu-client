@@ -17,8 +17,8 @@ class Main extends Component {
           flexDirection: "column"
         }}
       >
-        <div className="header">
-          <Header />
+        <div>
+          <Header history={this.props.history} />
         </div>
         <div className="main">
           <div className="main_banner">
