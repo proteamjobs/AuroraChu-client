@@ -7,7 +7,7 @@ class Signin extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header history={this.props.history} />
         <SigninForm history={this.props.history} />
         <Footer />
       </div>

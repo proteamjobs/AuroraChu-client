@@ -5,7 +5,6 @@ import { observer } from "mobx-react";
 @observer
 class Header extends Component {
   render() {
-    console.log(this.props);
     if (Store.isLogin) {
       return (
         <div className="header">
@@ -32,7 +31,12 @@ class Header extends Component {
               alignItems: "center"
             }}
           >
-            <span style={{ paddingRight: 10, fontSize: 16 }}>나의 강의실</span>
+            <span
+              style={{ paddingRight: 10, fontSize: 16 }}
+              onClick={() => this.props.history.push("/myclassroom")}
+            >
+              나의 강의실
+            </span>
             <span style={{ paddingRight: 10, fontSize: 16 }}>
               블로그 마케팅
             </span>

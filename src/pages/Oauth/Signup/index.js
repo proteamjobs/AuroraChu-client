@@ -6,7 +6,7 @@ import SignupForm from "./SignupForm";
 function Signup({ history }) {
   return (
     <>
-      <Header />
+      <Header history={history} />
       <SignupForm history={history} />
       <Footer />
     </>
