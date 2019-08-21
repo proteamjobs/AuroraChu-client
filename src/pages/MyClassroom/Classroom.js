@@ -1,71 +1,145 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
-import { Layout, Menu, Icon, Progress, Avatar } from "antd";
+import { Layout, Menu, Spin, Progress, Avatar, Button, Radio } from "antd";
 import "./Classroom.css";
-
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+import axios from "axios";
+import ReactPlayer from "react-player";
+const { Content, Sider } = Layout;
 
 export class Classroom extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      videos: null,
+      selectedVideo: null,
+      percentage: 0
+    };
+  }
+
+  componentDidMount = () => {
+    axios
+      .get("http://13.209.78.148:8080/videos", {
+        headers: {
+          Authorization: `JWT ${this.props.jwt}`
+        }
+      })
+      .then(res => {
+        if (res.data.success) {
+          console.log(res.data.videos);
+          this.setState({
+            videos: res.data.videos,
+            selectedVideo: res.data.videos[0],
+            percentage: res.data.process.percentage
+          });
+        }
+      });
+  };
+
+  onSelectLecture = ({ key }) => {
+    let video_id = Number(key);
+    let selectedVideo = this.state.videos.filter(
+      video => video.video_id === video_id
+    )[0];
+
+    this.setState({
+      selectedVideo: selectedVideo
+    });
+  };
+
+  onVideoComplete = () => {
+    let video_id = this.state.selectedVideo.video_id;
+    let jwt = this.props.jwt;
+
+    axios
+      .post(`http://13.209.78.148:8080/videos/${video_id}/complete`, null, {
+        headers: {
+          Authorization: `JWT ${jwt}`
+        }
+      })
+      .then(res => {
+        if (res.data.success) {
+          axios
+            .get("http://13.209.78.148:8080/videos", {
+              headers: {
+                Authorization: `JWT ${this.props.jwt}`
+              }
+            })
+            .then(res => {
+              if (res.data.success) {
+                this.setState({
+                  videos: res.data.videos,
+                  percentage: res.data.process.percentage
+                });
+              } else {
+                alert(res.data.message);
+              }
+            });
+        }
+      });
+  };
+
   render() {
-    return (
-      <Layout style={{ height: "100%" }}>
-        <Layout>
-          <Sider width={200} style={{ background: "#fff" }}>
-            <div className="user_info">
-              <Avatar size={50} icon="user" />
-              <div>캐로로중사</div>
-              <Progress percent={50} status="active" />
+    const { videos, selectedVideo, percentage } = this.state;
+    return videos ? (
+      <Layout className="layout">
+        <Sider
+          breakpoint="xs"
+          width="250"
+          collapsedWidth="0"
+          className="sider-wrapper"
+        >
+          <div className="user-wrapper">
+            <Avatar className="marinBottom" size={50} icon="user" />
+            <div className="marinBottom">캐로로중사</div>
+            <Progress percent={percentage} status="active" />
+          </div>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            onSelect={this.onSelectLecture}
+            style={{ height: "100%", borderRight: 0 }}
+          >
+            {videos.map(video => (
+              <Menu.Item key={video.video_id}>
+                <span>{video.title}</span>
+                <Radio checked={video.isComplete} />
+              </Menu.Item>
+            ))}
+          </Menu>
+        </Sider>
+        {selectedVideo ? (
+          <Content className="content-wrapper">
+            <h3>{selectedVideo.title}</h3>
+            <div className="player-wrapper">
+              <ReactPlayer
+                className="react-player"
+                url="https://www.youtube.com/watch?v=88EuPFPnFyg"
+                width="100%"
+                height="100%"
+                controls
+              />
             </div>
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
-              style={{ height: "100%", borderRight: 0 }}
+            <h3>내용 설명</h3>
+            <br />
+            {selectedVideo.description.split("\n").map((line, idx) => (
+              <span key={idx}>
+                {line}
+                <br />
+              </span>
+            ))}
+            <Button
+              disabled={selectedVideo.isComplete ? true : false}
+              onClick={this.onVideoComplete}
             >
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="user" />
-                    마케팅 이론
-                  </span>
-                }
-              >
-                <Menu.Item key="1">마케팅이란</Menu.Item>
-                <Menu.Item key="2">마케팅 학개론</Menu.Item>
-                <Menu.Item key="3">마케팅의 정석</Menu.Item>
-              </SubMenu>
-              <SubMenu
-                key="sub2"
-                title={
-                  <span>
-                    <Icon type="laptop" />
-                    마케팅 실전편
-                  </span>
-                }
-              >
-                <Menu.Item key="5">블로그 마케팅이란</Menu.Item>
-                <Menu.Item key="6">유의할 점</Menu.Item>
-                <Menu.Item key="7">블로그 마케팅 잘하는 법</Menu.Item>
-              </SubMenu>
-            </Menu>
-          </Sider>
-          <Layout style={{ padding: "0 24px 24px" }}>
-            <Header>title</Header>
-            <Content
-              style={{
-                background: "#fff",
-                padding: 24,
-                margin: 0,
-                minHeight: 280
-              }}
-            >
-              Content
-            </Content>
-          </Layout>
-        </Layout>
+              학습완료
+            </Button>
+          </Content>
+        ) : (
+          "강의를 선택해주세요."
+        )}
       </Layout>
+    ) : (
+      <Spin tip="Loading..." />
     );
   }
 }

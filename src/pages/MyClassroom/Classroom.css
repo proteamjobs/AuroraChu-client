@@ -1,5 +1,39 @@
-.user_info {
+.layout {
+  height: 100%;
+  max-width: 1170px;
+  margin: auto;
+  background-color: #fff;
+}
+
+.sider-wrapper {
+  width: 25vw;
+  background-color: #fff;
+}
+
+.user-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 32px 16px 18px 16px;
+}
+
+.content-wrapper {
+  background-color: #fff;
+  padding: 24px;
+  min-height: 280px;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.marinBottom {
+  margin-bottom: 5px;
 }
