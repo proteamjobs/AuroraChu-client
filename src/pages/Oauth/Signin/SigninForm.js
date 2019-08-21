@@ -22,14 +22,17 @@ class LoginForm extends Component {
           })
           .then(res => {
             if (res.data.success) {
+              let jwt = res.data.data.jwt;
+              Store.storeToken(jwt);
               axios
                 .get("http://13.209.78.148:8080/auth/me", {
                   headers: {
-                    Authorization: `JWT ${res.data.data.jwt}`
+                    Authorization: `JWT ${jwt}`
                   }
                 })
                 .then(res => {
                   if (res.data.success) {
+                    console.log(res.data);
                     Store.login(res.data.user);
                     toJS(Store.user);
                     this.props.history.push("/");
