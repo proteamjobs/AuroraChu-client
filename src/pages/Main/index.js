@@ -11,15 +11,8 @@ import { observer } from "mobx-react";
 class Main extends Component {
   render() {
     return (
-      <div
-        style={{
-          height: "100vh",
-          flexDirection: "column"
-        }}
-      >
-        <div>
-          <Header history={this.props.history} />
-        </div>
+      <>
+        <Header history={this.props.history} />
         <div className="main">
           <div className="main_banner">
             <p className="main_banner_text">Hello World!</p>
@@ -28,10 +21,8 @@ class Main extends Component {
             <MainMarketersList />
           </div>
         </div>
-        <div className="footer">
-          <Footer />
-        </div>
-      </div>
+        <Footer />
+      </>
     );
   }
 }
