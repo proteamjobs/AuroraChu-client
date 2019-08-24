@@ -5,6 +5,7 @@ import Signin from "./pages/Oauth/Signin";
 import Signup from "./pages/Oauth/Signup";
 import NotMatch from "./pages/NotMatch";
 import MyClassroom from "./pages/MyClassroom";
+import Mypage from "./pages/Mypage";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/myclassroom" component={MyClassroom} />
-
+        <Route path="/mypage" component={Mypage} />
         <Route component={NotMatch} />
       </Switch>
     </Router>

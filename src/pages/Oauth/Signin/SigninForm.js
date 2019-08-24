@@ -20,10 +20,11 @@ class LoginForm extends Component {
             email: email,
             password: password
           })
-          .then(res => {
+          .then(async res => {
             if (res.data.success) {
               let jwt = res.data.data.jwt;
-              Store.storeToken(jwt);
+              await sessionStorage.setItem("token", jwt);
+              await Store.storeToken(jwt);
               axios
                 .get("http://13.209.78.148:8080/auth/me", {
                   headers: {

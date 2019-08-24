@@ -19,13 +19,14 @@
 
 .header {
   display: flex;
-  background-color: #f8f8f8;
-  width: 100vw;
+  flex-direction: row;
+  width: 100%;
   max-width: 1170px;
-  height: 80px;
-  margin: auto;
+  /* height: 80px; */
+  margin: 0;
   justify-content: space-between;
   align-items: center;
+  background-image: url("./header.png");
 }
 
 .footer {
