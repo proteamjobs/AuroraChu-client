@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import {
-  Layout,
-  Menu,
-  Spin,
-  Progress,
-  Avatar,
+  // Layout,
+  // Menu,
+  // Spin,
+  // Progress,
+  // Avatar,
+  // Radio,
+  // Icon,
+  // Breadcrumb,
+  // Modal,
   Button,
-  Radio,
-  Icon,
-  Breadcrumb,
-  Modal,
   Form,
   Input
 } from "antd";
+import baseURL from "../../baseURL";
 
 class FixPassword extends Component {
   state = {
@@ -30,7 +31,7 @@ class FixPassword extends Component {
           oldPassword: values.password,
           newPassword: values.newPassword
         };
-        fetch("http://13.209.78.148:8080/users/password", {
+        fetch(baseURL + "/users/password", {
           method: "PUT",
           headers: {
             Authorization: `JWT ${token}`,

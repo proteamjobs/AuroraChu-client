@@ -20,17 +20,17 @@
 .header {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  max-width: 1170px;
-  /* height: 80px; */
+  /* width: 100%; */
+  /* max-width: 1170px; */
+  height: 70px;
   margin: 0;
   justify-content: space-between;
   align-items: center;
   background-image: url("./header.png");
 }
 
-.footer {
+/* .footer {
   display: block;
   text-align: center;
   background-color: gray;
-}
+} */

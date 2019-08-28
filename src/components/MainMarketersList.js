@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactStars from "react-stars";
 import "./styles.css";
+import baseURL from "../baseURL";
 
 class MainMarketersList extends Component {
   state = {
@@ -8,7 +9,7 @@ class MainMarketersList extends Component {
   };
 
   getMarketerList() {
-    fetch("http://13.209.78.148:8080/marketers/latest")
+    fetch(baseURL + "/marketers/latest")
       .then(res => res.json())
       .then(json => {
         console.log(json);
@@ -35,6 +36,7 @@ class MainMarketersList extends Component {
                     <img
                       style={{ width: "100%", height: 100 }}
                       src={item.image_url}
+                      alt=""
                     />
                   </div>
                   <div

@@ -4,6 +4,7 @@ import { Layout, Menu, Spin, Progress, Avatar, Button, Radio } from "antd";
 import "./Classroom.css";
 import axios from "axios";
 import ReactPlayer from "react-player";
+import baseURL from "../../baseURL";
 const { Content, Sider } = Layout;
 
 export class Classroom extends Component {
@@ -18,7 +19,7 @@ export class Classroom extends Component {
 
   componentDidMount = () => {
     axios
-      .get("http://13.209.78.148:8080/videos", {
+      .get(baseURL + "/videos", {
         headers: {
           Authorization: `JWT ${this.props.jwt}`
         }
@@ -51,7 +52,7 @@ export class Classroom extends Component {
     let jwt = this.props.jwt;
 
     axios
-      .post(`http://13.209.78.148:8080/videos/${video_id}/complete`, null, {
+      .post(`${baseURL}/videos/${video_id}/complete`, null, {
         headers: {
           Authorization: `JWT ${jwt}`
         }
@@ -59,7 +60,7 @@ export class Classroom extends Component {
       .then(res => {
         if (res.data.success) {
           axios
-            .get("http://13.209.78.148:8080/videos", {
+            .get(baseURL + "/videos", {
               headers: {
                 Authorization: `JWT ${this.props.jwt}`
               }
@@ -81,7 +82,7 @@ export class Classroom extends Component {
   render() {
     const { videos, selectedVideo, percentage } = this.state;
     return videos ? (
-      <Layout className="layout">
+      <Layout style={{ marginTop: "25px" }}>
         <Sider
           breakpoint="xs"
           width="250"
@@ -97,7 +98,7 @@ export class Classroom extends Component {
             mode="inline"
             defaultSelectedKeys={["1"]}
             onSelect={this.onSelectLecture}
-            style={{ height: "100%", borderRight: 0 }}
+            style={{ borderRight: 0 }}
           >
             {videos.map(video => (
               <Menu.Item key={video.video_id}>
