@@ -35,10 +35,21 @@
   left: 0;
 }
 
-.marinBottom {
-  margin-bottom: 5px;
+.marginBottom {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .header {
   background-color: #f8f8f8;
+}
+
+.mypage-content {
+  display: flex;
+  padding: 0;
+  min-height: 280px;
+  border: 1px solid black;
+  margin-left: 30px;
+  align-items: center;
+  justify-content: center;
 }
