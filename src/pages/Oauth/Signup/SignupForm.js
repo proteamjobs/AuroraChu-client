@@ -3,6 +3,7 @@ import { Checkbox, Modal, Button, Form, Input, Icon, message } from "antd";
 import "antd/dist/antd.css";
 import "./SignupForm.css";
 import axios from "axios";
+import baseURL from "../../../baseURL";
 
 function RegistrationForm(props) {
   const [checkAge, setCheckAge] = useState(false);
@@ -18,7 +19,7 @@ function RegistrationForm(props) {
       const { email, password, agreementMarketing } = values;
       if (!err) {
         axios
-          .post("http://13.209.78.148:8080/users", {
+          .post(baseURL + "/users", {
             email: email,
             password: password,
             marketingReceiveAgree: agreementMarketing
@@ -50,15 +51,13 @@ function RegistrationForm(props) {
   };
 
   const duplicationCheck = (rule, value, callback) => {
-    axios
-      .get(`http://13.209.78.148:8080/auth/verify?email=${value}`)
-      .then(res => {
-        if (!res.data.success) {
-          callback("이미 가입된 이메일입니다.");
-        } else {
-          callback();
-        }
-      });
+    axios.get(`${baseURL}/auth/verify?email=${value}`).then(res => {
+      if (!res.data.success) {
+        callback("이미 가입된 이메일입니다.");
+      } else {
+        callback();
+      }
+    });
   };
 
   const checkedAgreementAge = (rule, value, callback) => {

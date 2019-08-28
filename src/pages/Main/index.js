@@ -1,28 +1,51 @@
 import React, { Component } from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+// import Header from "../../components/Header";
+// import Footer from "../../components/Footer";
 import MainMarketersList from "../../components/MainMarketersList";
+import { Carousel, Layout } from "antd";
+import "antd/dist/antd.css";
 import "./Main.css";
 
-import Store from "../../mobx/signinStore";
+// import Store from "../../mobx/signinStore";
 import { observer } from "mobx-react";
 
+const { Content } = Layout;
 @observer
 class Main extends Component {
   render() {
     return (
-      <>
-        <Header history={this.props.history} />
-        <div className="main">
-          <div className="main_banner">
-            <p className="main_banner_text">Hello World!</p>
+      <Content>
+        {/* <Header history={this.props.history} /> */}
+        {/* <div className="main"> */}
+        <Carousel autoplay>
+          <div>
+            {/* <h3>1</h3> */}
+            <img
+              src={
+                "https://wake-up-file-server.s3.ap-northeast-2.amazonaws.com/slide-banner/000.png"
+              }
+              alt=""
+            />
           </div>
           <div>
-            <MainMarketersList />
+            {/* <h3>1</h3> */}
+            <img
+              src={
+                "https://wake-up-file-server.s3.ap-northeast-2.amazonaws.com/slide-banner/000.png"
+              }
+              alt=""
+            />
           </div>
+        </Carousel>
+        {/* <div className="main_banner">
+            <p className="main_banner_text">Hello World!</p>
+          </div> */}
+        <div>
+          <MainMarketersList />
         </div>
-        <Footer />
-      </>
+        {/* </div> */}
+        {/* <Footer /> */}
+      </Content>
     );
   }
 }

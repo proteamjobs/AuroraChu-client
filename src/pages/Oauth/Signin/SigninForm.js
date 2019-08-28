@@ -7,6 +7,8 @@ import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import axios from "axios";
 import "./SigninForm.css";
+import baseURL from "../../../baseURL";
+import { withRouter } from "react-router-dom";
 
 @observer
 class LoginForm extends Component {
@@ -16,7 +18,7 @@ class LoginForm extends Component {
       const { email, password } = values;
       if (!err) {
         axios
-          .post("http://13.209.78.148:8080/auth/login", {
+          .post(baseURL + "/auth/login", {
             email: email,
             password: password
           })
@@ -26,13 +28,14 @@ class LoginForm extends Component {
               await sessionStorage.setItem("token", jwt);
               await Store.storeToken(jwt);
               axios
-                .get("http://13.209.78.148:8080/auth/me", {
+                .get(baseURL + "/auth/me", {
                   headers: {
                     Authorization: `JWT ${jwt}`
                   }
                 })
                 .then(res => {
                   if (res.data.success) {
+                    this.props.getUserData();
                     console.log(res.data);
                     Store.login(res.data.user);
                     toJS(Store.user);
@@ -105,4 +108,4 @@ class LoginForm extends Component {
 
 const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(LoginForm);
 
-export default WrappedNormalLoginForm;
+export default withRouter(WrappedNormalLoginForm);
