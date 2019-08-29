@@ -28,10 +28,9 @@ class DeleteUser extends Component {
         console.log("Received values of form: ", values);
 
         let data = {
-          oldPassword: values.password,
-          newPassword: values.newPassword
+          password: values.password
         };
-        fetch(baseURL + "/users/password", {
+        fetch(baseURL + "/users/withdrawal", {
           method: "PUT",
           headers: {
             Authorization: `JWT ${token}`,
@@ -43,9 +42,8 @@ class DeleteUser extends Component {
           .then(json => {
             console.log(json);
             if (json.success) {
-              alert("비밀번호 변경 완료!");
-            } else {
-              alert("실패하였습니다. 다시 시도해주세요!");
+              sessionStorage.clear();
+              window.location.reload();
             }
           });
       }

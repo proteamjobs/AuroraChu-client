@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 
 import {
   // Spin,
@@ -16,6 +17,7 @@ import {
 } from "antd";
 import "./Mypage.css";
 import ReactStars from "react-stars";
+import ImgCrop from "antd-img-crop";
 
 // import CustomHeader from "../../components/Header";
 // import Store from "../../mobx/signinStore";
@@ -83,6 +85,24 @@ class Mypage extends Component {
       });
     }
   }
+
+  defaultProfile = async () => {
+    const token = await sessionStorage.getItem("token");
+
+    fetch(baseURL + "/users/profile_img/default", {
+      method: "PUT",
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        if (json.success) {
+          window.location.reload();
+        }
+      });
+  };
 
   handleUpload = async () => {
     const token = await sessionStorage.getItem("token");
@@ -227,6 +247,7 @@ class Mypage extends Component {
                     편집
                   </Button>
                   <Modal
+                    style={{ textAlign: "center" }}
                     title="프로필 변경"
                     visible={this.state.profileModalVisiable}
                     footer={null}
@@ -240,11 +261,22 @@ class Mypage extends Component {
                       });
                     }}
                   >
-                    <Upload {...props}>
-                      <Button>
-                        <Icon type="upload" /> Select File
+                    <ImgCrop>
+                      <Upload {...props}>
+                        <Button>
+                          <Icon type="upload" /> Select File
+                        </Button>
+                      </Upload>
+                    </ImgCrop>
+                    <div>
+                      <Button
+                        type="primary"
+                        onClick={this.defaultProfile}
+                        style={{ marginTop: 16 }}
+                      >
+                        기본 이미지로 변경
                       </Button>
-                    </Upload>
+                    </div>
                     <Button
                       type="primary"
                       onClick={this.handleUpload}
@@ -451,7 +483,7 @@ class Mypage extends Component {
         </>
       );
     } else {
-      return <div>Loding...</div>;
+      return <Redirect to="/" />;
     }
   }
 }
