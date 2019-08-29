@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import Header from "../../../components/Header";
 // import Footer from "../../../components/Footer";
 import SigninForm from "./SigninForm";
+import { withRouter } from "react-router-dom";
 
 class Signin extends Component {
   render() {
@@ -18,4 +19,4 @@ class Signin extends Component {
   }
 }
 
-export default Signin;
+export default withRouter(Signin);
