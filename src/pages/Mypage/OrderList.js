@@ -7,20 +7,24 @@ const columns = [
   {
     title: "상품명",
     dataIndex: "name",
+    align: "center",
     render: text => <a>{text}</a>
   },
   {
     title: "마케터",
     className: "marketer",
-    dataIndex: "marketer"
+    dataIndex: "marketer",
+    align: "center"
   },
   {
     title: "구매 일시",
-    dataIndex: "date"
+    dataIndex: "date",
+    align: "center"
   },
   {
     title: "",
-    dataIndex: "button"
+    dataIndex: "button",
+    align: "center"
   }
 ];
 

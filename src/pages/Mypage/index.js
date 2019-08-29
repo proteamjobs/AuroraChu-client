@@ -134,7 +134,7 @@ class Mypage extends Component {
             profileModalVisiable: false
           });
           // this.getUserData();
-          window.location.reload();
+          // window.location.reload();
         }
       });
   };

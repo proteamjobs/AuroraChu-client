@@ -81,14 +81,26 @@ class FixPassword extends Component {
           <Form.Item label="새로운 비밀번호">
             {getFieldDecorator("newPassword", {
               rules: [
-                { required: true, message: "새로운 비밀번호를 입력해주세요!" }
+                { required: true, message: "새로운 비밀번호를 입력해주세요!" },
+                {
+                  pattern: /^(?=.*[\d])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+
+                  message:
+                    "최소 8자리이상의 영문자, 숫자, 특수문자 조합으로 입력해주세요."
+                }
               ]
             })(<Input.Password />)}
           </Form.Item>
           <Form.Item label="새로운 비밀번호 확인">
             {getFieldDecorator("newPasswordReplay", {
               rules: [
-                { required: true, message: "새로운 비밀번호를 입력해주세요!" }
+                { required: true, message: "새로운 비밀번호를 입력해주세요!" },
+                {
+                  pattern: /^(?=.*[\d])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/,
+
+                  message:
+                    "최소 8자리이상의 영문자, 숫자, 특수문자 조합으로 입력해주세요."
+                }
               ]
             })(<Input.Password />)}
           </Form.Item>
