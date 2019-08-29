@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // import Footer from "../../components/Footer";
 import MainMarketersList from "../../components/MainMarketersList";
 import { Carousel, Layout } from "antd";
+import { withRouter } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./Main.css";
 
@@ -50,4 +51,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default withRouter(Main);

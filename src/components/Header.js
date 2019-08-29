@@ -69,7 +69,7 @@ class Header extends Component {
             }}
           >
             <Link to={"/"} style={{ color: "white" }}>
-              WakeUp{" "}
+              Wake-Up{" "}
             </Link>
           </div>
           <div
@@ -103,7 +103,7 @@ class Header extends Component {
             }}
           >
             <Link to={"/"} style={{ color: "white" }}>
-              WakeUp{" "}
+              Wake-Up{" "}
             </Link>
           </div>
           <div
@@ -115,7 +115,7 @@ class Header extends Component {
             }}
           >
             <div style={{ marginRight: 20 }}>블로그마케팅</div>
-            <Link to="/signin">
+            <Link to={"/signin"}>
               <Button type="primary">로그인</Button>
             </Link>
           </div>

@@ -98,7 +98,7 @@ class LoginForm extends Component {
           </Button>
         </Form.Item>
         <div className="extra-function-button-wrapper">
-          <Link>비밀번호 찾기</Link>
+          <Link to="">비밀번호 찾기</Link>
           <Link to="/signup">회원이 아니신가요?</Link>
         </div>
       </Form>
