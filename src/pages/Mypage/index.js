@@ -35,6 +35,12 @@ const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Search } = Input;
 
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
 @observer
 class Mypage extends Component {
   state = {
@@ -42,7 +48,7 @@ class Mypage extends Component {
     menuTitle: "거래 내역 조회",
     profileModalVisiable: false,
     nicknameModalVisiable: false,
-    fileList: [],
+    // fileList: [],
     file: null,
     uploading: false,
     loading: false,
@@ -99,45 +105,46 @@ class Mypage extends Component {
       .then(json => {
         console.log(json);
         if (json.success) {
-          window.location.reload();
-        }
-      });
-  };
-
-  handleUpload = async () => {
-    const token = await sessionStorage.getItem("token");
-    const { fileList } = this.state;
-    const { file } = this.state;
-    const formData = new FormData();
-
-    formData.append("imageFile", fileList[0]);
-    // formData.append("imageFile", file);
-
-    this.setState({
-      uploading: true
-    });
-
-    fetch(baseURL + "/users/profile_img", {
-      method: "PUT",
-      headers: {
-        Authorization: `JWT ${token}`
-      },
-      body: formData
-    })
-      .then(res => res.json())
-      .then(json => {
-        console.log(json);
-        if (json.success) {
-          this.setState({
-            fileList: [],
-            uploading: false,
-            profileModalVisiable: false
-          });
-          // this.getUserData();
           // window.location.reload();
+          this.props.getUserData();
         }
       });
   };
+
+  // handleUpload = async () => {
+  //   const token = await sessionStorage.getItem("token");
+  //   const { fileList } = this.state;
+  //   const { file } = this.state;
+  //   const formData = new FormData();
+
+  //   formData.append("imageFile", fileList[0]);
+  //   // formData.append("imageFile", file);
+
+  //   this.setState({
+  //     uploading: true
+  //   });
+
+  //   fetch(baseURL + "/users/profile_img", {
+  //     method: "PUT",
+  //     headers: {
+  //       Authorization: `JWT ${token}`
+  //     },
+  //     body: formData
+  //   })
+  //     .then(res => res.json())
+  //     .then(json => {
+  //       console.log(json);
+  //       if (json.success) {
+  //         this.setState({
+  //           fileList: [],
+  //           uploading: false,
+  //           profileModalVisiable: false
+  //         });
+  //         // this.getUserData();
+  //         // window.location.reload();
+  //       }
+  //     });
+  // };
 
   nicknameCheck(nickname) {
     fetch(`${baseURL}/users/verify?nickname=${nickname}`)
@@ -186,33 +193,89 @@ class Mypage extends Component {
       });
   }
 
-  // componentDidMount() {
-  //   this.props.getUserData();
-  // }
+  // --------
+
+  handleProfileUpload = async () => {
+    const token = await sessionStorage.getItem("token");
+    const { file } = this.state;
+    const formData = new FormData();
+
+    formData.append("imageFile", file);
+
+    this.setState({
+      uploading: true
+    });
+
+    fetch(baseURL + "/users/profile_img", {
+      method: "PUT",
+      headers: {
+        Authorization: `JWT ${token}`
+      },
+      body: formData
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        if (json.success) {
+          this.setState({
+            file: null,
+            uploading: false,
+            profileModalVisiable: false
+          });
+          this.props.getUserData();
+          // window.location.reload();
+        }
+      });
+  };
+
+  // -------
 
   render() {
-    const { uploading, fileList } = this.state;
+    // ------
+    const uploadButton = (
+      <div>
+        <Icon type={this.state.loading ? "loading" : "plus"} />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+    const { imageUrl } = this.state;
+    // -----
+
+    const { uploading, file } = this.state;
+    // const props = {
+    //   onRemove: file => {
+    //     this.setState(state => {
+    //       const index = state.fileList.indexOf(file);
+    //       const newFileList = state.fileList.slice();
+    //       newFileList.splice(index, 1);
+    //       return {
+    //         fileList: newFileList
+    //       };
+    //     });
+    //   },
+    //   beforeUpload: file => {
+    //     console.log(file);
+    //     this.setState(state => ({
+    //       fileList: [...state.fileList, file]
+    //     }));
+    //     // this.setState({
+    //     //   file: file
+    //     // });
+    //     return false;
+    //   },
+    //   fileList
+    // };
+
     const props = {
-      onRemove: file => {
-        this.setState(state => {
-          const index = state.fileList.indexOf(file);
-          const newFileList = state.fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            fileList: newFileList
-          };
-        });
-      },
       beforeUpload: file => {
-        this.setState(state => ({
-          fileList: [...state.fileList, file]
-        }));
-        // this.setState({
-        //   file: file
-        // });
+        getBase64(file, imageUrl => {
+          this.setState({
+            file: file,
+            imageUrl
+          });
+        });
         return false;
-      },
-      fileList
+      }
     };
 
     if (this.props.userInfo !== null) {
@@ -247,6 +310,7 @@ class Mypage extends Component {
                     편집
                   </Button>
                   <Modal
+                    width={200}
                     style={{ textAlign: "center" }}
                     title="프로필 변경"
                     visible={this.state.profileModalVisiable}
@@ -261,31 +325,50 @@ class Mypage extends Component {
                       });
                     }}
                   >
+                    {/* ----- */}
+
                     <ImgCrop>
-                      <Upload {...props}>
-                        <Button>
-                          <Icon type="upload" /> Select File
-                        </Button>
+                      <Upload
+                        name="avatar"
+                        listType="picture-card"
+                        className="avatar-uploader"
+                        showUploadList={false}
+                        {...props}
+                      >
+                        {imageUrl ? (
+                          <img
+                            src={imageUrl}
+                            alt="avatar"
+                            style={{ width: "100%" }}
+                          />
+                        ) : (
+                          uploadButton
+                        )}
                       </Upload>
                     </ImgCrop>
                     <div>
                       <Button
-                        type="primary"
+                        type="default"
+                        size="small"
                         onClick={this.defaultProfile}
                         style={{ marginTop: 16 }}
                       >
-                        기본 이미지로 변경
+                        기본 이미지
                       </Button>
                     </div>
+
                     <Button
                       type="primary"
-                      onClick={this.handleUpload}
-                      disabled={fileList.length === 0}
+                      onClick={this.handleProfileUpload}
+                      disabled={file === null}
                       loading={uploading}
                       style={{ marginTop: 16 }}
+                      block
                     >
                       변경하기
                     </Button>
+
+                    {/* ----- */}
                   </Modal>
                   <div className="marginBottom">
                     <span style={{ marginRight: 5 }}>
