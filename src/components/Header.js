@@ -1,44 +1,45 @@
 import React, { Component } from "react";
-import Store from "../mobx/signinStore";
 import { observer } from "mobx-react";
-import { Button, Dropdown, Menu } from "antd";
+import { Button, Dropdown, Menu, Avatar } from "antd";
 import { Link } from "react-router-dom";
+// import Store from "../mobx/signinStore";
+// import baseURL from "../baseURL";
 
 @observer
 class Header extends Component {
-  state = {
-    userInfo: null
-  };
+  // state = {
+  //   userInfo: null
+  // };
 
-  async getUserData() {
-    const token = await sessionStorage.getItem("token");
+  // async getUserData() {
+  //   const token = await sessionStorage.getItem("token");
 
-    console.log(token);
-    if (token !== null) {
-      fetch("http://13.209.78.148:8080/auth/me", {
-        headers: {
-          Authorization: `JWT ${token}`
-        }
-      })
-        .then(res => res.json())
-        .then(json => {
-          console.log(json);
-          if (json.success) {
-            this.setState({
-              userInfo: json.user
-            });
-          }
-          console.log(this.state);
-        });
-    }
-  }
+  //   console.log(token);
+  //   if (token !== null) {
+  //     fetch(baseURL + "/auth/me", {
+  //       headers: {
+  //         Authorization: `JWT ${token}`
+  //       }
+  //     })
+  //       .then(res => res.json())
+  //       .then(json => {
+  //         console.log(json);
+  //         if (json.success) {
+  //           this.setState({
+  //             userInfo: json.user
+  //           });
+  //         }
+  //         console.log(this.state);
+  //       });
+  //   }
+  // }
 
-  componentDidMount() {
-    this.getUserData();
-  }
+  componentDidMount = async () => {};
 
   render() {
-    if (this.state.userInfo !== null) {
+    // this.props.getUserData();
+    if (this.props.userInfo !== null) {
+      // if (sessionStorage.getItem("token")) {
       const menu = (
         <Menu>
           <Menu.Item>
@@ -47,9 +48,10 @@ class Header extends Component {
           <Menu.Item
             onClick={async () => {
               await sessionStorage.clear();
-              await this.setState({
-                userInfo: null
-              });
+              // await this.setState({
+              //   userInfo: null
+              // });
+              await this.props.resetUserData();
             }}
           >
             <Link to="/">로그아웃</Link>
@@ -66,7 +68,9 @@ class Header extends Component {
               marginLeft: 20
             }}
           >
-            Aurora Chu
+            <Link to={"/"} style={{ color: "white" }}>
+              WakeUp{" "}
+            </Link>
           </div>
           <div
             style={{
@@ -76,14 +80,13 @@ class Header extends Component {
               marginRight: 20
             }}
           >
-            <div style={{ marginRight: 20 }}>나의 강의실</div>
-            <div style={{ marginRight: 20 }}>블로그마케팅</div>
+            <Link to={"/myclassroom"}>
+              <div style={{ marginRight: 20, color: "black" }}>나의 강의실</div>
+            </Link>
+            <div style={{ marginRight: 20, color: "black" }}>블로그마케팅</div>
 
             <Dropdown overlay={menu}>
-              <img
-                src={this.state.userInfo.profile_url}
-                style={{ width: 50, height: 50 }}
-              />
+              <Avatar size={55} src={this.props.userInfo.profile_url}></Avatar>
             </Dropdown>
           </div>
         </div>
@@ -99,7 +102,9 @@ class Header extends Component {
               marginLeft: 20
             }}
           >
-            Aurora Chu
+            <Link to={"/"} style={{ color: "white" }}>
+              WakeUp{" "}
+            </Link>
           </div>
           <div
             style={{
@@ -110,13 +115,9 @@ class Header extends Component {
             }}
           >
             <div style={{ marginRight: 20 }}>블로그마케팅</div>
-            <Button
-              onClick={() => {
-                this.props.history.push("/signin");
-              }}
-            >
-              로그인
-            </Button>
+            <Link to="/signin">
+              <Button type="primary">로그인</Button>
+            </Link>
           </div>
         </div>
       );

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
 import {
+  // Spin,
+  // Progress,
+  // Radio,
   Layout,
   Menu,
-  Spin,
-  Progress,
   Avatar,
   Button,
-  Radio,
   Icon,
   Breadcrumb,
   Modal,
@@ -17,7 +17,8 @@ import {
 import "./Mypage.css";
 import ReactStars from "react-stars";
 
-import CustomHeader from "../../components/Header";
+// import CustomHeader from "../../components/Header";
+// import Store from "../../mobx/signinStore";
 
 import OrderList from "./OrderList";
 import AddMarketer from "./AddMarketer";
@@ -25,10 +26,10 @@ import AddMarketerEdu from "./AddMarketerEdu";
 import FixMarketerInfo from "./FixMarketerInfo";
 import FixPassword from "./FixPassword";
 import DeleteUser from "./DeleteUser";
-
-import Store from "../../mobx/signinStore";
 import { observer } from "mobx-react";
-const { Content, Sider, Header, Footer } = Layout;
+import baseURL from "../../baseURL";
+
+const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Search } = Input;
 
@@ -37,7 +38,6 @@ class Mypage extends Component {
   state = {
     menuKey: "1",
     menuTitle: "거래 내역 조회",
-    userInfo: {},
     profileModalVisiable: false,
     nicknameModalVisiable: false,
     fileList: [],
@@ -47,29 +47,30 @@ class Mypage extends Component {
     nicknameCheck: null,
     changeNickname: null
   };
+  // userInfo: {},
 
-  async getUserData() {
-    const token = await sessionStorage.getItem("token");
+  // async getUserData() {
+  //   const token = await sessionStorage.getItem("token");
 
-    console.log(token);
-    if (token !== null) {
-      fetch("http://13.209.78.148:8080/auth/me", {
-        headers: {
-          Authorization: `JWT ${token}`
-        }
-      })
-        .then(res => res.json())
-        .then(json => {
-          console.log(json);
-          if (json.success) {
-            this.setState({
-              userInfo: json.user
-            });
-          }
-          console.log(this.state);
-        });
-    }
-  }
+  //   console.log(token);
+  //   if (token !== null) {
+  //     fetch("http://13.209.78.148:8080/auth/me", {
+  //       headers: {
+  //         Authorization: `JWT ${token}`
+  //       }
+  //     })
+  //       .then(res => res.json())
+  //       .then(json => {
+  //         console.log(json);
+  //         if (json.success) {
+  //           this.setState({
+  //             userInfo: json.user
+  //           });
+  //         }
+  //         console.log(this.state);
+  //       });
+  //   }
+  // }
 
   showModal(modal) {
     if (modal === 1) {
@@ -96,7 +97,7 @@ class Mypage extends Component {
       uploading: true
     });
 
-    fetch("http://13.209.78.148:8080/users/profile_img", {
+    fetch(baseURL + "/users/profile_img", {
       method: "PUT",
       headers: {
         Authorization: `JWT ${token}`
@@ -119,7 +120,7 @@ class Mypage extends Component {
   };
 
   nicknameCheck(nickname) {
-    fetch(`http://13.209.78.148:8080/users/verify?nickname=${nickname}`)
+    fetch(`${baseURL}/users/verify?nickname=${nickname}`)
       .then(res => res.json())
       .then(json => {
         console.log(json);
@@ -143,7 +144,7 @@ class Mypage extends Component {
     };
     console.log(data);
 
-    fetch("http://13.209.78.148:8080/users/nickname", {
+    fetch(baseURL + "/users/nickname", {
       method: "PUT",
       headers: {
         Authorization: `JWT ${token}`,
@@ -161,16 +162,16 @@ class Mypage extends Component {
             nicknameModalVisiable: false
           });
         }
-        this.getUserData();
+        this.props.getUserData();
       });
   }
 
-  componentDidMount() {
-    this.getUserData();
-  }
+  // componentDidMount() {
+  //   this.props.getUserData();
+  // }
 
   render() {
-    const { uploading, fileList, file, imageUrl } = this.state;
+    const { uploading, fileList } = this.state;
     const props = {
       onRemove: file => {
         this.setState(state => {
@@ -194,12 +195,12 @@ class Mypage extends Component {
       fileList
     };
 
-    if (this.state.userInfo !== {}) {
+    if (this.props.userInfo !== null) {
       return (
-        <Layout className="layout">
-          <Header style={{ padding: 0 }}>
+        <>
+          {/* <Header style={{ padding: 0 }}>
             <CustomHeader />
-          </Header>
+          </Header> */}
 
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
@@ -215,7 +216,7 @@ class Mypage extends Component {
                 className="sider-wrapper"
               >
                 <div className="user-wrapper">
-                  <Avatar src={this.state.userInfo.profile_url} size={80} />
+                  <Avatar src={this.props.userInfo.profile_url} size={80} />
                   <Button
                     style={{ marginTop: 10 }}
                     size="small"
@@ -256,7 +257,7 @@ class Mypage extends Component {
                   </Modal>
                   <div className="marginBottom">
                     <span style={{ marginRight: 5 }}>
-                      {this.state.userInfo.nickname}
+                      {this.props.userInfo.nickname}
                     </span>
                     <Button
                       size="small"
@@ -422,7 +423,7 @@ class Mypage extends Component {
             </Layout>
           </Content>
 
-          <Footer
+          {/* <Footer
             style={{
               textAlign: "center",
               position: "absolute",
@@ -446,9 +447,11 @@ class Mypage extends Component {
             </span>
             <br />
             <span>Copyright © 2019 000 Inc. All rights reserved.</span>
-          </Footer>
-        </Layout>
+          </Footer> */}
+        </>
       );
+    } else {
+      return <div>Loding...</div>;
     }
   }
 }
