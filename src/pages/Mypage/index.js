@@ -112,7 +112,8 @@ class Mypage extends Component {
             uploading: false,
             profileModalVisiable: false
           });
-          this.getUserData();
+          // this.getUserData();
+          window.location.reload();
         }
       });
   };
