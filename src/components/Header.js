@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Button, Dropdown, Menu, Avatar } from "antd";
 import { Link } from "react-router-dom";
+import "./styles.css";
+
 // import Store from "../mobx/signinStore";
 // import baseURL from "../baseURL";
 
@@ -62,14 +64,24 @@ class Header extends Component {
         <div className="header">
           <div
             style={{
-              color: "white",
-              fontSize: 18,
+              fontSize: "1.313rem",
               fontWeight: "bold",
               marginLeft: 20
             }}
           >
             <Link to={"/"} style={{ color: "white" }}>
-              Wake-Up{" "}
+              Wake-Up
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  backgroundColor: "#037756",
+                  padding: "1px 5px 2px 5px",
+                  borderRadius: "7px",
+                  marginLeft: "5px"
+                }}
+              >
+                BETA
+              </span>
             </Link>
           </div>
           <div
@@ -81,9 +93,21 @@ class Header extends Component {
             }}
           >
             <Link to={"/myclassroom"}>
-              <div style={{ marginRight: 20, color: "black" }}>나의 강의실</div>
+              <div
+                style={{
+                  marginRight: 20,
+                  color: "black",
+                  fontSize: "0.825rem"
+                }}
+              >
+                나의 강의실
+              </div>
             </Link>
-            <div style={{ marginRight: 20, color: "black" }}>블로그마케팅</div>
+            <div
+              style={{ marginRight: 20, color: "black", fontSize: "0.825rem" }}
+            >
+              블로그마케팅
+            </div>
 
             <Dropdown overlay={menu}>
               <Avatar size={55} src={this.props.userInfo.profile_url}></Avatar>
@@ -96,16 +120,27 @@ class Header extends Component {
         <div className="header">
           <div
             style={{
-              color: "white",
-              fontSize: 18,
+              fontSize: "1.313rem",
               fontWeight: "bold",
               marginLeft: 20
             }}
           >
             <Link to={"/"} style={{ color: "white" }}>
-              Wake-Up{" "}
+              Wake-Up
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  backgroundColor: "#037756",
+                  padding: "1px 5px 2px 5px",
+                  borderRadius: "7px",
+                  marginLeft: "5px"
+                }}
+              >
+                BETA
+              </span>
             </Link>
           </div>
+
           <div
             style={{
               display: "flex",
@@ -114,9 +149,22 @@ class Header extends Component {
               marginRight: 20
             }}
           >
-            <div style={{ marginRight: 20 }}>블로그마케팅</div>
+            <div
+              style={{ marginRight: 20, color: "black", fontSize: "0.875rem" }}
+            >
+              블로그마케팅
+            </div>
             <Link to={"/signin"}>
-              <Button type="primary">로그인</Button>
+              <Button
+                type="primary"
+                style={{
+                  backgroundColor: "#049f73",
+                  borderColor: "#049f73",
+                  borderRadius: "5px"
+                }}
+              >
+                로그인
+              </Button>
             </Link>
           </div>
         </div>

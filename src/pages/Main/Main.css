@@ -12,6 +12,10 @@
   color: #000;
 }
 
+.ant-rate-star:not(:last-child) {
+  margin-right: 3px;
+}
+
 /* .main { */
 /* display: flex; */
 /* height: 90vh; */

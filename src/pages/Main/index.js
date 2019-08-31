@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 // import Header from "../../components/Header";
 // import Footer from "../../components/Footer";
-import MainMarketersList from "../../components/MainMarketersList";
+// import MainMarketersList from "../../components/MainMarketersList";
+
 import { Carousel, Layout } from "antd";
 import { withRouter } from "react-router-dom";
 import "antd/dist/antd.css";
@@ -9,6 +10,7 @@ import "./Main.css";
 
 // import Store from "../../mobx/signinStore";
 import { observer } from "mobx-react";
+import MainNewMarketer from "./MainNewMarketer";
 
 const { Content } = Layout;
 @observer
@@ -42,7 +44,11 @@ class Main extends Component {
             <p className="main_banner_text">Hello World!</p>
           </div> */}
         <div>
-          <MainMarketersList />
+          {/* <MainMarketersList /> */}
+          <span style={{ fontWeight: "bold", fontSize: "1rem" }}>
+            최근 등록한 마케터
+          </span>
+          <MainNewMarketer />
         </div>
         {/* </div> */}
         {/* <Footer /> */}

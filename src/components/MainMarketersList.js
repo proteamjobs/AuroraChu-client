@@ -34,7 +34,7 @@ class MainMarketersList extends Component {
                 <div className="listItem" key={item.marketer_id}>
                   <div>
                     <img
-                      style={{ width: "100%", height: 100 }}
+                      style={{ width: "100%" }}
                       src={item.image_url}
                       alt=""
                     />
