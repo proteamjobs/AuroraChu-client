@@ -63,7 +63,7 @@ class MainNewMarketer extends Component {
                     <div
                       style={{
                         fontSize: "0.8125rem",
-                        height: "60px",
+                        height: "55px",
                         overflow: "hidden",
                         display: "-webkit-box",
                         WebkitLineClamp: "3",
@@ -82,6 +82,7 @@ class MainNewMarketer extends Component {
                       value={item.avg_star}
                       style={{ fontSize: "14px" }}
                     />
+                    <span style={{ fontSize: "0.75rem" }}>(0)</span>
                   </Card>
                 </List.Item>
               );
