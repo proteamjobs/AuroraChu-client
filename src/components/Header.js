@@ -97,14 +97,14 @@ class Header extends Component {
                 style={{
                   marginRight: 20,
                   color: "black",
-                  fontSize: "0.825rem"
+                  fontSize: "0.9375rem"
                 }}
               >
                 나의 강의실
               </div>
             </Link>
             <div
-              style={{ marginRight: 20, color: "black", fontSize: "0.825rem" }}
+              style={{ marginRight: 20, color: "black", fontSize: "0.9375rem" }}
             >
               블로그마케팅
             </div>
@@ -150,7 +150,7 @@ class Header extends Component {
             }}
           >
             <div
-              style={{ marginRight: 20, color: "black", fontSize: "0.875rem" }}
+              style={{ marginRight: 20, color: "black", fontSize: "0.9375rem" }}
             >
               블로그마케팅
             </div>
