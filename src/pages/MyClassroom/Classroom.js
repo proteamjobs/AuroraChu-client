@@ -18,7 +18,7 @@ export class Classroom extends Component {
     };
   }
 
-  componentDidMount = () => {
+  handleGetVideos = () => {
     axios
       .get(baseURL + "/videos", {
         headers: {
@@ -27,7 +27,6 @@ export class Classroom extends Component {
       })
       .then(res => {
         if (res.data.success) {
-          console.log(res.data.videos);
           this.setState({
             videos: res.data.videos,
             selectedVideo: res.data.videos[0],
@@ -35,6 +34,10 @@ export class Classroom extends Component {
           });
         }
       });
+  };
+
+  componentDidMount = () => {
+    this.handleGetVideos();
   };
 
   // onClickTestButton = () => {
@@ -53,6 +56,7 @@ export class Classroom extends Component {
     this.setState({
       selectedVideo: selectedVideo
     });
+    console.log("222 : ", this.state.selectedVideo);
   };
 
   onVideoComplete = () => {
@@ -73,12 +77,13 @@ export class Classroom extends Component {
                 Authorization: `JWT ${this.props.jwt}`
               }
             })
-            .then(res => {
+            .then(async res => {
               if (res.data.success) {
                 this.setState({
                   videos: res.data.videos,
                   percentage: res.data.process.percentage
                 });
+                await this.onSelectLecture({ key: video_id });
               } else {
                 alert(res.data.message);
               }
@@ -99,7 +104,7 @@ export class Classroom extends Component {
         >
           <div className="user-wrapper">
             <Avatar
-              size={55}
+              size={65}
               className="margin-bottom-small"
               src={this.props.userInfo.profile_url}
             ></Avatar>
@@ -137,7 +142,7 @@ export class Classroom extends Component {
             <div className="player-wrapper margin-bottom-medium">
               <ReactPlayer
                 className="react-player"
-                url="https://www.youtube.com/watch?v=88EuPFPnFyg"
+                url={selectedVideo.src}
                 width="100%"
                 height="100%"
                 controls
