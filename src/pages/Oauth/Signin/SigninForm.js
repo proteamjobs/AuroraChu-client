@@ -1,16 +1,12 @@
 import React, { Component } from "react";
-import Store from "../../../mobx/signinStore";
 import { Link } from "react-router-dom";
 import { Form, Icon, Input, Button } from "antd";
-import "antd/dist/antd.css";
-import { observer } from "mobx-react";
-import { toJS } from "mobx";
-import axios from "axios";
 import "./SigninForm.css";
+import "antd/dist/antd.css";
+import axios from "axios";
 import baseURL from "../../../baseURL";
 import { withRouter } from "react-router-dom";
 
-@observer
 class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
@@ -26,7 +22,6 @@ class LoginForm extends Component {
             if (res.data.success) {
               let jwt = res.data.data.jwt;
               await sessionStorage.setItem("token", jwt);
-              await Store.storeToken(jwt);
               axios
                 .get(baseURL + "/auth/me", {
                   headers: {
@@ -36,9 +31,6 @@ class LoginForm extends Component {
                 .then(res => {
                   if (res.data.success) {
                     this.props.getUserData();
-                    console.log(res.data);
-                    Store.login(res.data.user);
-                    toJS(Store.user);
                     this.props.history.push("/");
                   } else {
                     alert(res.data.message);
@@ -56,7 +48,8 @@ class LoginForm extends Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form onSubmit={this.handleSubmit} className="login-form-container">
+        <div className="title">로그인</div>
         <Form.Item>
           {getFieldDecorator("email", {
             rules: [{ required: true, message: "이메일을 입력해주세요." }]
@@ -93,6 +86,12 @@ class LoginForm extends Component {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            // style={{
+            //   width: '100%',
+            //   backgroundColor: "#049f73",
+            //   borderColor: "#049f73",
+            //   borderRadius: "5px"
+            // }}
           >
             로그인 하기
           </Button>

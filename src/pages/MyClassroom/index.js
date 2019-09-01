@@ -1,25 +1,28 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { message } from "antd";
 import Classroom from "./Classroom";
-import { observer } from "mobx-react";
-// import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
-// import Store from "../../mobx/signinStore";
-// import { toJS } from "mobx";
-// import baseURL from "../../baseURL";
 
-@observer
 class MyClassroom extends Component {
   render() {
-    // return toJS(Store.isLogin) ? (
-    return true ? (
-      <>
-        {/* <Header history={this.props.history} /> */}
-        {/* <Classroom jwt={toJS(Store.jwt)} /> */}
-        <Classroom jwt={sessionStorage.getItem("token")} />
-        {/* <Footer /> */}
-      </>
+    const { userInfo, getUserData, history } = this.props;
+    console.log("history::: ", this.props.history);
+
+    return userInfo !== null ? (
+      userInfo.status >= 2 ? (
+        <Classroom
+          userInfo={userInfo}
+          getUserData={getUserData}
+          jwt={sessionStorage.getItem("token")}
+        />
+      ) : (
+        <Redirect to="/mypage" />
+        // message.error("마케터 교육신청 후 이용가능합니다.", 1, () =>
+        //   history.push("/mypage")
+        // )
+      )
     ) : (
+      // message.error("로그인 후 이용가능합니다.", 1, () => history.push("/"))
       <Redirect to="/" />
     );
   }

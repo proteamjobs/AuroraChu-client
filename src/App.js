@@ -11,7 +11,7 @@ import { Layout } from "antd";
 import { gray } from "ansi-colors";
 import baseURL from "./baseURL";
 
-const { Header, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 
 class App extends Component {
   state = {
@@ -78,27 +78,37 @@ class App extends Component {
                   resetUserData={this.resetUserData}
                 />
               </Header>
-              <Switch>
-                <Route exact path="/" component={Main} />
-                <Route path="/signup" component={Signup} />
-                <Route
-                  path="/signin"
-                  component={() => (
-                    <Signin getUserData={this.getUserData}></Signin>
-                  )}
-                />
-                <Route path="/myclassroom" component={MyClassroom} />
-                <Route
-                  path="/mypage"
-                  component={() => (
-                    <Mypage
-                      userInfo={this.state.userInfo}
-                      getUserData={this.getUserData}
-                    ></Mypage>
-                  )}
-                />
-                <Route component={NotMatch} />
-              </Switch>
+              <Content>
+                <Switch>
+                  <Route exact path="/" component={Main} />
+                  <Route path="/signup" component={Signup} />
+                  <Route
+                    path="/signin"
+                    component={() => (
+                      <Signin getUserData={this.getUserData}></Signin>
+                    )}
+                  />
+                  <Route
+                    path="/myclassroom"
+                    component={() => (
+                      <MyClassroom
+                        userInfo={this.state.userInfo}
+                        getUserData={this.getUserData}
+                      ></MyClassroom>
+                    )}
+                  />
+                  <Route
+                    path="/mypage"
+                    component={() => (
+                      <Mypage
+                        userInfo={this.state.userInfo}
+                        getUserData={this.getUserData}
+                      ></Mypage>
+                    )}
+                  />
+                  <Route component={NotMatch} />
+                </Switch>
+              </Content>
             </Layout>
             <Footer
               style={{
