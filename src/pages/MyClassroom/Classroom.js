@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
+import { Redirect } from "react-router-dom";
 import { Layout, Menu, Spin, Progress, Avatar, Button, Radio } from "antd";
 import "./Classroom.css";
 import axios from "axios";
@@ -17,7 +18,7 @@ export class Classroom extends Component {
     };
   }
 
-  componentDidMount = () => {
+  handleGetVideos = () => {
     axios
       .get(baseURL + "/videos", {
         headers: {
@@ -26,7 +27,6 @@ export class Classroom extends Component {
       })
       .then(res => {
         if (res.data.success) {
-          console.log(res.data.videos);
           this.setState({
             videos: res.data.videos,
             selectedVideo: res.data.videos[0],
@@ -35,6 +35,17 @@ export class Classroom extends Component {
         }
       });
   };
+
+  componentDidMount = () => {
+    this.handleGetVideos();
+  };
+
+  // onClickTestButton = () => {
+  //   let percentage = this.state.percentage;
+  //   if (percentage >= 80) {
+  //     this.props.history.push("/");
+  //   }
+  // };
 
   onSelectLecture = ({ key }) => {
     let video_id = Number(key);
@@ -45,6 +56,7 @@ export class Classroom extends Component {
     this.setState({
       selectedVideo: selectedVideo
     });
+    console.log("222 : ", this.state.selectedVideo);
   };
 
   onVideoComplete = () => {
@@ -65,12 +77,13 @@ export class Classroom extends Component {
                 Authorization: `JWT ${this.props.jwt}`
               }
             })
-            .then(res => {
+            .then(async res => {
               if (res.data.success) {
                 this.setState({
                   videos: res.data.videos,
                   percentage: res.data.process.percentage
                 });
+                await this.onSelectLecture({ key: video_id });
               } else {
                 alert(res.data.message);
               }
@@ -82,7 +95,7 @@ export class Classroom extends Component {
   render() {
     const { videos, selectedVideo, percentage } = this.state;
     return videos ? (
-      <Layout style={{ marginTop: "25px" }}>
+      <Layout className="container">
         <Sider
           breakpoint="xs"
           width="250"
@@ -90,9 +103,24 @@ export class Classroom extends Component {
           className="sider-wrapper"
         >
           <div className="user-wrapper">
-            <Avatar className="marinBottom" size={50} icon="user" />
-            <div className="marinBottom">캐로로중사</div>
+            <Avatar
+              size={65}
+              className="margin-bottom-small"
+              src={this.props.userInfo.profile_url}
+            ></Avatar>
+            <h3 className="margin-bottom-small">
+              {this.props.userInfo.nickname}
+            </h3>
             <Progress percent={percentage} status="active" />
+          </div>
+          <div className="buttons-wrapper">
+            <Button
+              onClick={this.onClickTestButton}
+              className="function-button"
+            >
+              시험보기
+            </Button>
+            <Button className="function-button">마케터 신청</Button>
           </div>
           <Menu
             mode="inline"
@@ -102,7 +130,7 @@ export class Classroom extends Component {
           >
             {videos.map(video => (
               <Menu.Item key={video.video_id}>
-                <span>{video.title}</span>
+                <span className="margin-right-small">{video.title}</span>
                 <Radio checked={video.isComplete} />
               </Menu.Item>
             ))}
@@ -110,27 +138,29 @@ export class Classroom extends Component {
         </Sider>
         {selectedVideo ? (
           <Content className="content-wrapper">
-            <h3>{selectedVideo.title}</h3>
-            <div className="player-wrapper">
+            <h2 className="margin-bottom-medium">{selectedVideo.title}</h2>
+            <div className="player-wrapper margin-bottom-medium">
               <ReactPlayer
                 className="react-player"
-                url="https://www.youtube.com/watch?v=88EuPFPnFyg"
+                url={selectedVideo.src}
                 width="100%"
                 height="100%"
                 controls
               />
             </div>
-            <h3>내용 설명</h3>
-            <br />
-            {selectedVideo.description.split("\n").map((line, idx) => (
-              <span key={idx}>
-                {line}
-                <br />
-              </span>
-            ))}
+            <h3 className="margin-bottom-medium">내용 설명</h3>
+            <div className="margin-bottom-medium">
+              {selectedVideo.description.split("\n").map((line, idx) => (
+                <span key={idx}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </div>
             <Button
               disabled={selectedVideo.isComplete ? true : false}
               onClick={this.onVideoComplete}
+              className="complete-video-button"
             >
               학습완료
             </Button>
@@ -140,7 +170,9 @@ export class Classroom extends Component {
         )}
       </Layout>
     ) : (
-      <Spin tip="Loading..." />
+      <Layout className="container">
+        <Spin tip="Loading..." className="spin" />
+      </Layout>
     );
   }
 }
