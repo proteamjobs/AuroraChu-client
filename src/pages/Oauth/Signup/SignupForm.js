@@ -32,7 +32,7 @@ function RegistrationForm(props) {
                 () => props.history.push("/signin")
               );
             } else {
-              message.error("Error. 잠시 후 다시 시도해주세요", 1.5, () =>
+              message.error("Error. 잠시 후 다시 시도해주세요", 1, () =>
                 props.history.push("/signup")
               );
             }

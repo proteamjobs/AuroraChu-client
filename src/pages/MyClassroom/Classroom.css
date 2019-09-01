@@ -1,9 +1,9 @@
-/* .layout {
+.container {
   height: 100%;
   max-width: 1170px;
-  margin: auto;
+  margin: 30px auto;
   background-color: #fff;
-} */
+}
 
 .sider-wrapper {
   width: 25vw;
@@ -17,10 +17,19 @@
   margin: 32px 16px 18px 16px;
 }
 
+.buttons-wrapper {
+  width: 100%;
+}
+
+.function-button {
+  width: 50%;
+}
+
 .content-wrapper {
   background-color: #fff;
-  padding: 24px;
   min-height: 280px;
+  margin-left: 30px;
+  border: 1px solid #e8e8e8;
 }
 
 .player-wrapper {
@@ -34,6 +43,24 @@
   left: 0;
 }
 
-.marinBottom {
-  margin-bottom: 5px;
+.complete-video-button {
+  float: right;
+  margin-top: 20px;
+}
+
+.spin {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.margin-bottom-small {
+  margin-bottom: 12px;
+}
+
+.margin-bottom-medium {
+  margin-bottom: 24px;
+}
+
+.margin-right-small {
+  margin-right: 12px;
 }
