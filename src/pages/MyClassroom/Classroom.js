@@ -50,7 +50,7 @@ export class Classroom extends Component {
   onSelectLecture = ({ key }) => {
     let video_id = Number(key);
     let selectedVideo = this.state.videos.filter(
-      video => video.video_id === video_id
+      video => video.fk_video_id === video_id
     )[0];
 
     this.setState({
@@ -60,7 +60,7 @@ export class Classroom extends Component {
   };
 
   onVideoComplete = () => {
-    let video_id = this.state.selectedVideo.video_id;
+    let video_id = this.state.selectedVideo.fk_video_id;
     let jwt = this.props.jwt;
 
     axios
@@ -129,7 +129,7 @@ export class Classroom extends Component {
             style={{ borderRight: 0 }}
           >
             {videos.map(video => (
-              <Menu.Item key={video.video_id}>
+              <Menu.Item key={video.fk_video_id}>
                 <span className="margin-right-small">{video.title}</span>
                 <Radio checked={video.isComplete} />
               </Menu.Item>
