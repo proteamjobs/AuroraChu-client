@@ -10,6 +10,7 @@ import CustomHeader from "./components/Header";
 import { Layout } from "antd";
 import { gray } from "ansi-colors";
 import baseURL from "./baseURL";
+import Admin from "react-admin/lib/Admin";
 
 const { Header, Content, Footer } = Layout;
 
@@ -106,6 +107,7 @@ class App extends Component {
                       ></Mypage>
                     )}
                   />
+                  {/* <Route path="/admin" component={Admin} /> */}
                   <Route component={NotMatch} />
                 </Switch>
               </Content>
