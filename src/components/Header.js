@@ -66,11 +66,18 @@ class Header extends Component {
                 나의 강의실
               </div>
             </Link>
-            <div
-              style={{ marginRight: 20, color: "black", fontSize: "0.9375rem" }}
-            >
-              블로그마케팅
-            </div>
+
+            <Link to="/marketers">
+              <div
+                style={{
+                  marginRight: 20,
+                  color: "black",
+                  fontSize: "0.9375rem"
+                }}
+              >
+                블로그마케팅
+              </div>
+            </Link>
 
             <Dropdown overlay={menu}>
               <Avatar size={55} src={this.props.userInfo.profile_url}></Avatar>
@@ -112,11 +119,17 @@ class Header extends Component {
               marginRight: 20
             }}
           >
-            <div
-              style={{ marginRight: 20, color: "black", fontSize: "0.9375rem" }}
-            >
-              블로그마케팅
-            </div>
+            <Link to="/marketers">
+              <div
+                style={{
+                  marginRight: 20,
+                  color: "black",
+                  fontSize: "0.9375rem"
+                }}
+              >
+                블로그마케팅
+              </div>
+            </Link>
             <Link to={"/signin"}>
               <Button
                 type="primary"
