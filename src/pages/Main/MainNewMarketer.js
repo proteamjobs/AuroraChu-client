@@ -13,10 +13,12 @@ class MainNewMarketer extends Component {
     fetch(baseURL + "/marketers/latest")
       .then(res => res.json())
       .then(json => {
-        this.setState({
-          marketersList: json.data,
-          loading: false
-        });
+        if (json.success) {
+          this.setState({
+            marketersList: json.marketers,
+            loading: false
+          });
+        }
       });
   }
 
@@ -26,7 +28,6 @@ class MainNewMarketer extends Component {
 
   render() {
     let { marketersList } = this.state;
-
     if (marketersList.length !== 0) {
       return (
         <div style={{ padding: "10px" }}>
@@ -44,7 +45,7 @@ class MainNewMarketer extends Component {
                       <div>
                         <img
                           alt=""
-                          src={item.image_url}
+                          src={item.post.image_url}
                           width="100%"
                           height="120px"
                         />
@@ -58,7 +59,7 @@ class MainNewMarketer extends Component {
                         textAlign: "right"
                       }}
                     >
-                      {item.user_name}
+                      {item.marketer_info.nickname}
                     </div>
                     <div
                       style={{
@@ -71,18 +72,20 @@ class MainNewMarketer extends Component {
                         marginTop: "5px"
                       }}
                     >
-                      {item.title}
+                      {item.post.title}
                     </div>
                     <div style={{ fontSize: "0.8125rem", marginTop: "10px" }}>
-                      판매량 : {item.number_of_sales}
+                      판매량 : {item.marketer_info.number_of_sales}
                     </div>
                     <Rate
                       allowHalf
                       disabled
-                      value={item.avg_star}
+                      value={item.marketer_info.avg_star}
                       style={{ fontSize: "14px" }}
                     />
-                    <span style={{ fontSize: "0.75rem" }}>(0)</span>
+                    <span style={{ fontSize: "0.75rem" }}>
+                      ({item.marketer_info.review_count})
+                    </span>
                   </Card>
                 </List.Item>
               );
