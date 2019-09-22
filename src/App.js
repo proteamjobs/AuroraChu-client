@@ -10,6 +10,7 @@ import CustomHeader from "./components/Header";
 import { Layout } from "antd";
 import { gray } from "ansi-colors";
 import baseURL from "./baseURL";
+import Marketers from "./pages/Marketers";
 import Admin from "react-admin/lib/Admin";
 
 const { Header, Content, Footer } = Layout;
@@ -98,6 +99,13 @@ class App extends Component {
                       ></MyClassroom>
                     )}
                   />
+
+                  <Route
+                    path="/marketers/:category"
+                    component={() => <Marketers />}
+                  />
+                  <Route path="/marketers" component={() => <Marketers />} />
+
                   <Route
                     path="/mypage"
                     component={() => (
