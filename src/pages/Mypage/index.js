@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 
 import {
-  // Spin,
-  // Progress,
-  // Radio,
   Layout,
   Menu,
   Avatar,
@@ -18,17 +15,12 @@ import {
 import "./Mypage.css";
 import ReactStars from "react-stars";
 import ImgCrop from "antd-img-crop";
-
-// import CustomHeader from "../../components/Header";
-// import Store from "../../mobx/signinStore";
-
 import OrderList from "./OrderList";
 import AddMarketer from "./AddMarketer";
 import AddMarketerEdu from "./AddMarketerEdu";
 import FixMarketerInfo from "./FixMarketerInfo";
 import FixPassword from "./FixPassword";
 import DeleteUser from "./DeleteUser";
-import { observer } from "mobx-react";
 import baseURL from "../../baseURL";
 
 const { Content, Sider } = Layout;
@@ -41,44 +33,18 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
-@observer
 class Mypage extends Component {
   state = {
     menuKey: "1",
     menuTitle: "거래 내역 조회",
     profileModalVisiable: false,
     nicknameModalVisiable: false,
-    // fileList: [],
     file: null,
     uploading: false,
     loading: false,
     nicknameCheck: null,
     changeNickname: null
   };
-  // userInfo: {},
-
-  // async getUserData() {
-  //   const token = await sessionStorage.getItem("token");
-
-  //   console.log(token);
-  //   if (token !== null) {
-  //     fetch("http://13.209.78.148:8080/auth/me", {
-  //       headers: {
-  //         Authorization: `JWT ${token}`
-  //       }
-  //     })
-  //       .then(res => res.json())
-  //       .then(json => {
-  //         console.log(json);
-  //         if (json.success) {
-  //           this.setState({
-  //             userInfo: json.user
-  //           });
-  //         }
-  //         console.log(this.state);
-  //       });
-  //   }
-  // }
 
   showModal(modal) {
     if (modal === 1) {
@@ -103,54 +69,16 @@ class Mypage extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
-          // window.location.reload();
           this.props.getUserData();
         }
       });
   };
 
-  // handleUpload = async () => {
-  //   const token = await sessionStorage.getItem("token");
-  //   const { fileList } = this.state;
-  //   const { file } = this.state;
-  //   const formData = new FormData();
-
-  //   formData.append("imageFile", fileList[0]);
-  //   // formData.append("imageFile", file);
-
-  //   this.setState({
-  //     uploading: true
-  //   });
-
-  //   fetch(baseURL + "/users/profile_img", {
-  //     method: "PUT",
-  //     headers: {
-  //       Authorization: `JWT ${token}`
-  //     },
-  //     body: formData
-  //   })
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       console.log(json);
-  //       if (json.success) {
-  //         this.setState({
-  //           fileList: [],
-  //           uploading: false,
-  //           profileModalVisiable: false
-  //         });
-  //         // this.getUserData();
-  //         // window.location.reload();
-  //       }
-  //     });
-  // };
-
   nicknameCheck(nickname) {
     fetch(`${baseURL}/users/verify?nickname=${nickname}`)
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.setState({
             nicknameCheck: true,
@@ -169,7 +97,6 @@ class Mypage extends Component {
     let data = {
       newNickName: nickname
     };
-    console.log(data);
 
     fetch(baseURL + "/users/nickname", {
       method: "PUT",
@@ -192,8 +119,6 @@ class Mypage extends Component {
         this.props.getUserData();
       });
   }
-
-  // --------
 
   handleProfileUpload = async () => {
     const token = await sessionStorage.getItem("token");
@@ -223,15 +148,11 @@ class Mypage extends Component {
             profileModalVisiable: false
           });
           this.props.getUserData();
-          // window.location.reload();
         }
       });
   };
 
-  // -------
-
   render() {
-    // ------
     const uploadButton = (
       <div>
         <Icon type={this.state.loading ? "loading" : "plus"} />
@@ -239,33 +160,8 @@ class Mypage extends Component {
       </div>
     );
     const { imageUrl } = this.state;
-    // -----
 
     const { uploading, file } = this.state;
-    // const props = {
-    //   onRemove: file => {
-    //     this.setState(state => {
-    //       const index = state.fileList.indexOf(file);
-    //       const newFileList = state.fileList.slice();
-    //       newFileList.splice(index, 1);
-    //       return {
-    //         fileList: newFileList
-    //       };
-    //     });
-    //   },
-    //   beforeUpload: file => {
-    //     console.log(file);
-    //     this.setState(state => ({
-    //       fileList: [...state.fileList, file]
-    //     }));
-    //     // this.setState({
-    //     //   file: file
-    //     // });
-    //     return false;
-    //   },
-    //   fileList
-    // };
-
     const props = {
       beforeUpload: file => {
         getBase64(file, imageUrl => {
@@ -281,10 +177,6 @@ class Mypage extends Component {
     if (this.props.userInfo !== null) {
       return (
         <>
-          {/* <Header style={{ padding: 0 }}>
-            <CustomHeader />
-          </Header> */}
-
           <Content style={{ padding: "0 50px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>마이페이지</Breadcrumb.Item>
@@ -367,8 +259,6 @@ class Mypage extends Component {
                     >
                       변경하기
                     </Button>
-
-                    {/* ----- */}
                   </Modal>
                   <div className="marginBottom">
                     <span style={{ marginRight: 5 }}>
@@ -537,32 +427,6 @@ class Mypage extends Component {
               </Content>
             </Layout>
           </Content>
-
-          {/* <Footer
-            style={{
-              textAlign: "center",
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              width: "100%"
-            }}
-          >
-            <span>ㅇㅇㅇ은 판매 당사자가 아니며 중매자 입니다.</span>
-            <br />
-            <span>
-              따라서 개별 마케터가 등록하여 판매한 모든 상품에 대한 거래정보 및
-              거래에 대한 책임은 각 판매자가 부담하고, 이에 대하여 ㅇㅇㅇ은 일체
-              책임지지 않습니다.
-            </span>
-            <br />
-            <span>
-              커넥트마케팅연구소(유) | 박하솜 | 010-0000-0000 | 전라북도 전주시
-              | 사업자 등록번호 : 000-00-00000
-            </span>
-            <br />
-            <span>Copyright © 2019 000 Inc. All rights reserved.</span>
-          </Footer> */}
         </>
       );
     } else {

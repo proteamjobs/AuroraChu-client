@@ -116,58 +116,6 @@ class MainNewMarketer extends Component {
         />
       );
     }
-    // if (marketersList.length !== 0) {
-    //   return (
-    //     <>
-    //       <List
-    //         grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 5, xl: 6, xxl: 3 }}
-    //         dataSource={marketersList}
-    //         renderItem={item => {
-    //           return (
-    //             <List.Item>
-    //               <Card
-    //                 bodyStyle={{ padding: "8px" }}
-    //                 hoverable
-    //                 style={{ width: 170, height: 270 }}
-    //                 cover={
-    //                   <div class="croping">
-    //                     <img
-    //                       alt="example"
-    //                       src={item.image_url}
-    //                       width="100%"
-    //                       height="120px"
-    //                     />
-    //                   </div>
-    //                 }
-    //               >
-    //                 <div style={{ fontSize: "12px", textAlign: "right" }}>
-    //                   {item.user_name}
-    //                 </div>
-    //                 <div
-    //                   style={{
-    //                     fontSize: "14px",
-    //                     height: "75px"
-    //                   }}
-    //                 >
-    //                   {item.title}
-    //                 </div>
-    //                 <div> 판매량 : {item.number_of_sales}</div>
-    //                 <Rate
-    //                   allowHalf
-    //                   disabled
-    //                   value={item.avg_star}
-    //                   style={{ fontSize: "14px" }}
-    //                 />
-    //               </Card>
-    //             </List.Item>
-    //           );
-    //         }}
-    //       />
-    //     </>
-    //   );
-    // } else {
-    //   return <div>Loding...</div>;
-    // }
   }
 }
 

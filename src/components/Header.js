@@ -1,47 +1,13 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
 import { Button, Dropdown, Menu, Avatar } from "antd";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
-// import Store from "../mobx/signinStore";
-// import baseURL from "../baseURL";
-
-@observer
 class Header extends Component {
-  // state = {
-  //   userInfo: null
-  // };
-
-  // async getUserData() {
-  //   const token = await sessionStorage.getItem("token");
-
-  //   console.log(token);
-  //   if (token !== null) {
-  //     fetch(baseURL + "/auth/me", {
-  //       headers: {
-  //         Authorization: `JWT ${token}`
-  //       }
-  //     })
-  //       .then(res => res.json())
-  //       .then(json => {
-  //         console.log(json);
-  //         if (json.success) {
-  //           this.setState({
-  //             userInfo: json.user
-  //           });
-  //         }
-  //         console.log(this.state);
-  //       });
-  //   }
-  // }
-
   componentDidMount = async () => {};
 
   render() {
-    // this.props.getUserData();
     if (this.props.userInfo !== null) {
-      // if (sessionStorage.getItem("token")) {
       const menu = (
         <Menu>
           <Menu.Item>
@@ -50,9 +16,6 @@ class Header extends Component {
           <Menu.Item
             onClick={async () => {
               await sessionStorage.clear();
-              // await this.setState({
-              //   userInfo: null
-              // });
               await this.props.resetUserData();
             }}
           >
