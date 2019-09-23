@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import { Pagination, Card, List, Rate } from "antd";
-import { withRouter, Link } from "react-router-dom";
-import NotMatch from "../NotMatch/index";
-import axios from "axios";
-import baseURL from "../../baseURL";
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./Marketers.css";
 
 class MarketersList extends Component {
-  handleOnChange = (page, pageSize) => {
-    console.log("onChange::: ", page, "   :    ", pageSize);
-  };
   render() {
-    console.log("MarketersList :: ", this.props.marketerList);
     return (
       <>
         <div style={{ height: "860px" }}>
@@ -22,7 +15,7 @@ class MarketersList extends Component {
             renderItem={item => {
               return (
                 <List.Item>
-                  <Link to={"/@" + item.marketer_info.nickname}>
+                  <Link to={"/marketers/@" + item.marketer_info.nickname}>
                     <Card
                       bodyStyle={{ padding: "8px" }}
                       hoverable
