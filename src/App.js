@@ -12,7 +12,6 @@ import { Layout } from "antd";
 import { gray } from "ansi-colors";
 import baseURL from "./baseURL";
 import Marketers from "./pages/Marketers";
-import Admin from "react-admin/lib/Admin";
 
 const { Header, Content, Footer } = Layout;
 
@@ -30,7 +29,6 @@ class App extends Component {
   getUserData = async () => {
     const token = await sessionStorage.getItem("token");
 
-    // console.log(token);
     if (token !== null) {
       fetch(baseURL + "/auth/me", {
         headers: {
@@ -39,13 +37,11 @@ class App extends Component {
       })
         .then(res => res.json())
         .then(json => {
-          // console.log(json);
           if (json.success) {
             this.setState({
               userInfo: json.user
             });
           }
-          // console.log(this.state);
         });
     }
   };
@@ -60,27 +56,25 @@ class App extends Component {
           <Layout
             style={{
               minHeight: "100vh",
-              // maxWidth: "1170px",
               margin: "auto",
-              backgroundColor: "#fff"
+              backgroundColor: "#FFF"
             }}
           >
+            <Header style={{ padding: 0, height: "100px", background: "none" }}>
+              <CustomHeader
+                userInfo={this.state.userInfo}
+                getUserData={this.getUserData}
+                resetUserData={this.resetUserData}
+              />
+            </Header>
             <Layout
               style={{
-                // minHeight: "100vh",
                 maxWidth: "1170px",
                 width: "100%",
                 margin: "auto",
-                backgroundColor: "#fff"
+                backgroundColor: "#FFF"
               }}
             >
-              <Header style={{ padding: 0 }}>
-                <CustomHeader
-                  userInfo={this.state.userInfo}
-                  getUserData={this.getUserData}
-                  resetUserData={this.resetUserData}
-                />
-              </Header>
               <Content>
                 <Switch>
                   <Route exact path="/" component={Main} />
@@ -125,8 +119,6 @@ class App extends Component {
                       ></MarketerDetail>
                     )}
                   />
-
-                  {/* <Route path="/admin" component={Admin} /> */}
                   <Route component={NotMatch} />
                 </Switch>
               </Content>
@@ -134,10 +126,6 @@ class App extends Component {
             <Footer
               style={{
                 textAlign: "center",
-                // position: "absolute",
-                // bottom: 0,
-                // left: 0,
-                // right: 0,
                 maxWidth: "100%",
                 backgroundColor: { gray },
                 fontSize: "11px",
