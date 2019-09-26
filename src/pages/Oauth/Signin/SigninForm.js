@@ -5,6 +5,7 @@ import "./SigninForm.css";
 import "antd/dist/antd.css";
 import axios from "axios";
 import baseURL from "../../../baseURL";
+import handleLogin from "../../../module/Login";
 import { withRouter } from "react-router-dom";
 
 class LoginForm extends Component {
@@ -13,33 +14,11 @@ class LoginForm extends Component {
     this.props.form.validateFields((err, values) => {
       const { email, password } = values;
       if (!err) {
-        axios
-          .post(baseURL + "/auth/login", {
-            email: email,
-            password: password
-          })
-          .then(async res => {
-            if (res.data.success) {
-              let jwt = res.data.data.jwt;
-              await sessionStorage.setItem("token", jwt);
-              axios
-                .get(baseURL + "/auth/me", {
-                  headers: {
-                    Authorization: `JWT ${jwt}`
-                  }
-                })
-                .then(res => {
-                  if (res.data.success) {
-                    this.props.getUserData();
-                    this.props.history.push("/");
-                  } else {
-                    alert(res.data.message);
-                  }
-                });
-            } else {
-              alert(res.data.message);
-            }
-          });
+        let isResultHandleLogin = handleLogin(email, password, this.props);
+        if (isResultHandleLogin) {
+          this.props.getUserData();
+          this.props.history.push("/");
+        }
       }
     });
   };

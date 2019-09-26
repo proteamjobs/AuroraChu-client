@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import "./SignupForm.css";
 import axios from "axios";
 import baseURL from "../../../baseURL";
+import handleLogin from "../../../module/Login";
 
 function RegistrationForm(props) {
   const [checkAge, setCheckAge] = useState(false);
@@ -24,13 +25,19 @@ function RegistrationForm(props) {
             password: password,
             marketingReceiveAgree: agreementMarketing
           })
-          .then(res => {
+          .then(async res => {
             if (res.data.success) {
-              message.success(
-                "회원가입 성공! 로그인 페이지로 이동합니다",
-                2,
-                () => props.history.push("/signin")
+              let isResultHandleLogin = await handleLogin(
+                email,
+                password,
+                props
               );
+
+              if (isResultHandleLogin) {
+                message.success("회원가입 성공!", 3);
+              } else {
+                message.error("Error. 잠시 후 다시 시도해주세요", 1);
+              }
             } else {
               message.error("Error. 잠시 후 다시 시도해주세요", 1, () =>
                 props.history.push("/signup")

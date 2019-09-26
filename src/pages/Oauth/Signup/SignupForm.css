@@ -6,6 +6,7 @@
   min-width: 300px;
   margin: 0px auto;
   margin-top: 5vh;
+  margin-bottom: 5vh;
   padding: 24px 100px;
   border: 0.5px solid #dddddd;
   border-radius: 5px;
@@ -37,4 +38,32 @@
   font-weight: 600;
   text-align: center;
   margin-bottom: 12px;
+}
+
+.bridge_container {
+  border: 0.5px solid #e8e8e8;
+  max-width: 600px;
+  min-width: 300px;
+  margin: 0 auto;
+  margin-top: 5vh;
+  height: 500px;
+}
+
+.bridge_button_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bridge_button {
+  margin: 20px;
+}
+
+.bridge_img {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 400px;
+  padding: 30px;
+  margin: auto;
 }
