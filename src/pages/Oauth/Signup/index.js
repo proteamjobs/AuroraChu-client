@@ -1,14 +1,15 @@
 import React from "react";
-// import Header from "../../../components/Header";
-// import Footer from "../../../components/Footer";
 import SignupForm from "./SignupForm";
+import SignupBridge from "./SignupBridge";
 
-function Signup({ history }) {
+function Signup({ history, getUserData, userInfo }) {
   return (
     <>
-      {/* <Header history={history} /> */}
-      <SignupForm history={history} />
-      {/* <Footer /> */}
+      {!userInfo ? (
+        <SignupForm history={history} getUserData={getUserData} />
+      ) : (
+        <SignupBridge history={history} />
+      )}
     </>
   );
 }

@@ -36,9 +36,9 @@ class App extends Component {
         }
       })
         .then(res => res.json())
-        .then(json => {
+        .then(async json => {
           if (json.success) {
-            this.setState({
+            await this.setState({
               userInfo: json.user
             });
           }
@@ -78,7 +78,15 @@ class App extends Component {
               <Content>
                 <Switch>
                   <Route exact path="/" component={Main} />
-                  <Route path="/signup" component={Signup} />
+                  <Route
+                    path="/signup"
+                    component={() => (
+                      <Signup
+                        getUserData={this.getUserData}
+                        userInfo={this.state.userInfo}
+                      />
+                    )}
+                  />
                   <Route
                     path="/signin"
                     component={() => (
