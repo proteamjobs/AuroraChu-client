@@ -9,19 +9,24 @@ class MyClassroom extends Component {
     console.log("history::: ", this.props.history);
 
     return userInfo !== null ? (
-      userInfo.status >= 2 ? (
-        <Classroom
-          userInfo={userInfo}
-          getUserData={getUserData}
-          jwt={sessionStorage.getItem("token")}
-        />
-      ) : (
-        <Redirect to="/mypage" />
-        // message.error("마케터 교육신청 후 이용가능합니다.", 1, () =>
-        //   history.push("/mypage")
-        // )
-      )
+      <Classroom
+        userInfo={userInfo}
+        getUserData={getUserData}
+        jwt={sessionStorage.getItem("token")}
+      />
     ) : (
+      // userInfo.status >= 2 ? (
+      //   <Classroom
+      //     userInfo={userInfo}
+      //     getUserData={getUserData}
+      //     jwt={sessionStorage.getItem("token")}
+      //   />
+      // ) : (
+      //   <Redirect to="/mypage" />
+      //   // message.error("마케터 교육신청 후 이용가능합니다.", 1, () =>
+      //   //   history.push("/mypage")
+      //   // )
+      // )
       // message.error("로그인 후 이용가능합니다.", 1, () => history.push("/"))
       <Redirect to="/" />
     );
