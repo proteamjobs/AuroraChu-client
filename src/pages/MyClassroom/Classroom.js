@@ -94,6 +94,7 @@ export class Classroom extends Component {
 
   render() {
     const { videos, selectedVideo, percentage } = this.state;
+    let isFreeUser = this.props.userInfo.status >= 2 ? false : true;
     return videos ? (
       <Layout className="container">
         <Sider
@@ -122,6 +123,7 @@ export class Classroom extends Component {
             </Button>
             <Button className="function-button">마케터 신청</Button>
           </div>
+          <h3 style={{ padding: "0 0 5px 20px" }}>유료강의</h3>
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
@@ -129,7 +131,7 @@ export class Classroom extends Component {
             style={{ borderRight: 0 }}
           >
             {videos.map(video => (
-              <Menu.Item key={video.fk_video_id}>
+              <Menu.Item key={video.fk_video_id} disabled={isFreeUser}>
                 <span className="margin-right-small">{video.title}</span>
                 <Radio checked={video.isComplete} />
               </Menu.Item>
