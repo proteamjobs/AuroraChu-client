@@ -152,6 +152,10 @@ class Mypage extends Component {
       });
   };
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
     const uploadButton = (
       <div>
@@ -364,15 +368,23 @@ class Mypage extends Component {
                     <Menu.Item
                       key="3"
                       onClick={e => {
+                        // if (this.props.userInfo.status > 3) {
+                        //   this.setState({
+                        //     menuKey: e.key,
+                        //     menuTitle: "마케터 등록/수정"
+                        //   });
+                        // } else {
+                        //   alert("시험을 통과해주세요");
+                        // }
                         this.setState({
                           menuKey: e.key,
-                          menuTitle: "마케터 신청"
+                          menuTitle: "마케터 등록/수정"
                         });
                       }}
                     >
-                      마케터 신청
+                      마케터 등록/수정
                     </Menu.Item>
-                    <Menu.Item
+                    {/* <Menu.Item
                       key="4"
                       onClick={e => {
                         this.setState({
@@ -382,7 +394,7 @@ class Mypage extends Component {
                       }}
                     >
                       마케터 정보 수정
-                    </Menu.Item>
+                    </Menu.Item> */}
                   </SubMenu>
                   <SubMenu key="sub2" title={<span>계정 관리</span>}>
                     <Menu.Item
@@ -416,7 +428,7 @@ class Mypage extends Component {
                 ) : this.state.menuKey === "2" ? (
                   <AddMarketerEdu />
                 ) : this.state.menuKey === "3" ? (
-                  <AddMarketer />
+                  <AddMarketer user={this.props.userInfo} />
                 ) : this.state.menuKey === "4" ? (
                   <FixMarketerInfo />
                 ) : this.state.menuKey === "5" ? (
