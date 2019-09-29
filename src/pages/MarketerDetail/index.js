@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Tabs, Spin, Avatar, Button, Rate, Select } from "antd";
+import { Tabs, Spin, Avatar, Button, Rate, Select, Divider, Alert } from "antd";
+import { withRouter } from "react-router-dom";
+import baseURL from "../../baseURL";
 import axios from "axios";
+const { Option } = Select;
 
 class MarketerDetail extends Component {
   constructor(props) {
@@ -9,84 +12,171 @@ class MarketerDetail extends Component {
     this.state = {
       marketer_info: null,
       post: null,
-      reviews: []
+      reviews: [],
+      selected_quantity: 1
     };
   }
 
   componentDidMount() {
-    axios.get("http://13.124.88.11:8080/marketers/@중사캐로로").then(res => {
-      console.log(res);
-      if (res.data.success) {
-        this.setState({
-          marketer_info: res.data.marketer_info,
-          post: res.data.post,
-          reviews: res.data.reviews
-        });
-      }
-    });
+    axios
+      .get(`${baseURL}/marketers/${this.props.match.params.nickname}`)
+      .then(res => {
+        if (res.data.success) {
+          this.setState({
+            marketer_info: res.data.marketer_info,
+            post: res.data.post,
+            reviews: res.data.reviews
+          });
+        }
+      });
   }
 
+  renderQuantityOptions = num => {
+    let quantities = [];
+    for (let i = 1; i < num + 1; i++) {
+      quantities.push(i);
+    }
+    return quantities;
+  };
+
+  selectQuantity = num => {
+    this.setState({
+      selected_quantity: num
+    });
+  };
+
+  onClickBuy = () => {
+    if (!this.props.userInfo) {
+      alert("로그인 후 이용 가능한 서비스입니다.");
+    }
+  };
+
   render() {
-    const { Option } = Select;
     const { TabPane } = Tabs;
-    const { marketer_info, post, reviews } = this.state;
-    console.log(marketer_info, post, reviews);
+    const { marketer_info, post, reviews, selected_quantity } = this.state;
 
     return marketer_info && post ? (
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
         <div style={{ display: "flex" }}>
           <div>
-            <img src={post.image_url} />
+            <img
+              src={post.image_url}
+              style={{ width: 700, height: 450, marginRight: 40 }}
+            />
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex" }}>
-              <Avatar src={marketer_info.profile_url} size={60} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: 380
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: 20,
+                marginTop: 10
+              }}
+            >
+              <Avatar
+                src={marketer_info.profile_url}
+                size={60}
+                style={{ marginRight: 10 }}
+              />
               <div>
-                <div>{marketer_info.nickname}</div>
+                <div style={{ fontSize: 16 }}>{marketer_info.nickname}</div>
                 <Rate
                   allowHalf
                   disabled
                   value={marketer_info.avg_star}
-                  style={{ fontSize: "14px" }}
+                  style={{ fontSize: "16px" }}
                 />
               </div>
             </div>
-            <div>{post.title}</div>
+            <div style={{ marginBottom: 26, fontSize: 16 }}>{post.title}</div>
             <div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div>9000원</div>
-                <div>블로그 원고 작성 500자 이상</div>
-                <div>{post.avg_duration}일</div>
-                <div style={{ display: "flex" }}>
-                  <div>수량</div>
-                  <div>
-                    <Select
-                      defaultValue="1"
-                      style={{ width: 120 }}
-                      onChange={() => {}}
-                    >
-                      <Option value="1">1</Option>
-                      <Option value="2">2</Option>
-                      <Option value="3">3</Option>
-                      <Option value="4">4</Option>
-                      <Option value="5">5</Option>
-                    </Select>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  border: "1px solid #cdcdcd",
+                  padding: 26
+                }}
+              >
+                <div
+                  style={{ fontSize: 18, fontWeight: 600, marginBottom: 10 }}
+                >
+                  9,000원
+                </div>
+                <div style={{ marginLeft: 12 }}>
+                  <div style={{ fontSize: 15, marginBottom: 5 }}>
+                    블로그 원고 작성 500자 이상
+                  </div>
+                  <div style={{ fontSize: 15, marginBottom: 40 }}>
+                    평균 작업 기간 : {post.avg_duration}일
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: 15,
+                      marginBottom: 30
+                    }}
+                  >
+                    <div style={{ marginRight: 10 }}>수량</div>
+                    <div>
+                      <Select
+                        defaultValue="1"
+                        style={{ width: 120 }}
+                        onChange={num => this.selectQuantity(num)}
+                      >
+                        {this.renderQuantityOptions(10).map(num => (
+                          <Option value={num}>{num}</Option>
+                        ))}
+                      </Select>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <Button>문의 하기</Button>
-                  <Button>구매 하기</Button>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Button
+                    style={{
+                      width: 160,
+                      height: 36,
+                      marginRight: 10,
+                      fontSize: 15
+                    }}
+                  >
+                    문의 하기
+                  </Button>
+                  <Button
+                    style={{ width: 160, height: 36, fontSize: 15 }}
+                    onClick={this.onClickBuy}
+                  >
+                    구매 하기
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <Tabs defaultActiveKey="1" onChange={() => {}}>
+        <div style={{ marginTop: 20, marginBottom: 150, width: 700 }}>
+          <Tabs animated={false} defaultActiveKey="1">
             <TabPane tab="상세 정보" key="1">
-              {post.content}
+              <br />
+              {post.content.split("\n").map((line, idx) => {
+                return (
+                  <span key={idx}>
+                    {line}
+                    <br />
+                  </span>
+                );
+              })}
             </TabPane>
             <TabPane tab="취소 및 환불규정" key="2">
+              <br />
               가. 기본 환불 규정
               <br />
               1. 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.
@@ -126,22 +216,47 @@ class MarketerDetail extends Component {
             </TabPane>
             <TabPane tab="실 구매자 후기" key="3">
               {reviews.length ? (
-                reviews.map(review => (
-                  <div style={{ display: "flex" }}>
-                    <Avatar src={review.profile_url} size={40} />
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <div>{review.nickname}</div>
-                      <Rate
-                        allowHalf
-                        disabled
-                        value={review.star}
-                        style={{ fontSize: "14px" }}
-                      />
-                      <div>{review.content}</div>
-                      <div>{review.created_at}</div>
-                    </div>
+                <div style={{ marginTop: 10 }}>
+                  <div
+                    style={{
+                      marginBottom: 20
+                    }}
+                  >
+                    이 마케터와 실제 진행했던 소중한 후기 입니다.
                   </div>
-                ))
+                  <Divider />
+                  {reviews.map(review => (
+                    <div>
+                      <div style={{ display: "flex", marginLeft: 10 }}>
+                        <Avatar src={review.profile_url} size={50} />
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            marginLeft: 14
+                          }}
+                        >
+                          <div style={{ fontWeight: 600, fontSize: 15 }}>
+                            {review.nickname}
+                          </div>
+                          <Rate
+                            allowHalf
+                            disabled
+                            value={review.star}
+                            style={{ fontSize: "14px" }}
+                          />
+                          <div style={{ marginTop: 12, marginBottom: 8 }}>
+                            {review.content}
+                          </div>
+                          <div style={{ fontSize: 13 }}>
+                            {review.created_at.slice(0, 10)}
+                          </div>
+                        </div>
+                      </div>
+                      <Divider />
+                    </div>
+                  ))}
+                </div>
               ) : (
                 <div>리뷰가 없습니다.</div>
               )}
@@ -155,4 +270,4 @@ class MarketerDetail extends Component {
   }
 }
 
-export default MarketerDetail;
+export default withRouter(MarketerDetail);

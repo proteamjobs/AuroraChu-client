@@ -15,7 +15,7 @@ class MarketersList extends Component {
             renderItem={item => {
               return (
                 <List.Item>
-                  <Link to={"/marketers/@" + item.marketer_info.nickname}>
+                  <Link to={"/marketer/@" + item.marketer_info.nickname}>
                     <Card
                       bodyStyle={{ padding: "8px" }}
                       hoverable

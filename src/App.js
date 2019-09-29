@@ -50,6 +50,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.props);
     if (this.state.userInfo !== false) {
       return (
         <Router>
@@ -119,7 +120,7 @@ class App extends Component {
                     )}
                   />
                   <Route
-                    path="/marketer"
+                    path="/marketer/:nickname"
                     component={() => (
                       <MarketerDetail
                         userInfo={this.state.userInfo}
