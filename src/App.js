@@ -105,6 +105,15 @@ class App extends Component {
                   />
 
                   <Route
+                    path="/marketers/@:nickname"
+                    component={() => (
+                      <MarketerDetail
+                        userInfo={this.state.userInfo}
+                        getUserData={this.getUserData}
+                      ></MarketerDetail>
+                    )}
+                  />
+                  <Route
                     path="/marketers/:category"
                     component={() => <Marketers />}
                   />
@@ -117,15 +126,6 @@ class App extends Component {
                         userInfo={this.state.userInfo}
                         getUserData={this.getUserData}
                       ></Mypage>
-                    )}
-                  />
-                  <Route
-                    path="/marketer/:nickname"
-                    component={() => (
-                      <MarketerDetail
-                        userInfo={this.state.userInfo}
-                        getUserData={this.getUserData}
-                      ></MarketerDetail>
                     )}
                   />
                   <Route component={NotMatch} />
