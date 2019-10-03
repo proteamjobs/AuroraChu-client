@@ -7,6 +7,7 @@ import NotMatch from "./pages/NotMatch";
 import MyClassroom from "./pages/MyClassroom";
 import Mypage from "./pages/Mypage";
 import MarketerDetail from "./pages/MarketerDetail";
+import Chat from "./pages/Chat";
 import CustomHeader from "./components/Header";
 import { Layout } from "antd";
 import { gray } from "ansi-colors";
@@ -50,7 +51,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     if (this.state.userInfo !== false) {
       return (
         <Router>
@@ -128,6 +128,16 @@ class App extends Component {
                       ></MarketerDetail>
                     )}
                   />
+                  <Route
+                    path="/chat"
+                    component={() => (
+                      <Chat
+                        userInfo={this.state.userInfo}
+                        getUserData={this.getUserData}
+                      />
+                    )}
+                  />
+
                   <Route component={NotMatch} />
                 </Switch>
               </Content>
