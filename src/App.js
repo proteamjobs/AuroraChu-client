@@ -43,6 +43,7 @@ class App extends Component {
         .then(res => res.json())
         .then(async json => {
           if (json.success) {
+            console.log("userInfo:", json.user);
             await this.setState({
               userInfo: json.user
             });

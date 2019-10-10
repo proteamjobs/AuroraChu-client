@@ -17,7 +17,6 @@ class LoginForm extends Component {
           password,
           this.props
         );
-        console.log(isResultHandleLogin);
         if (isResultHandleLogin) {
           this.props.getUserData();
           this.props.history.push("/");
