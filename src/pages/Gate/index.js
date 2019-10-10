@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Result, Input, message } from "antd";
+import "./Gate.css";
 const { Search } = Input;
 
 class Gate extends Component {
   handleInput = e => {
     if (e !== "wakeup!") {
-      message.error("This is an error message");
+      message.error("코드가 올바르지 않습니다. 다시 시도해주세요.");
     } else {
-      message.success("This is a success message");
+      message.success("관리자님 환영합니다!");
       this.props.handleAdminCheck();
     }
   };

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Icon, Input, Button, message } from "antd";
 import "./SigninForm.css";
 import "antd/dist/antd.css";
 import handleLogin from "../../../module/Login";
@@ -9,13 +9,20 @@ import { withRouter } from "react-router-dom";
 class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       const { email, password } = values;
       if (!err) {
-        let isResultHandleLogin = handleLogin(email, password, this.props);
+        let isResultHandleLogin = await handleLogin(
+          email,
+          password,
+          this.props
+        );
+        console.log(isResultHandleLogin);
         if (isResultHandleLogin) {
           this.props.getUserData();
           this.props.history.push("/");
+        } else {
+          message.error("로그인에 실패했습니다. 다시 시도해주세요.", 2);
         }
       }
     });
