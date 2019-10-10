@@ -19,7 +19,7 @@ class MarketerDetail extends Component {
 
   componentDidMount() {
     axios
-      .get(`${baseURL}/marketers/${this.props.match.params.nickname}`)
+      .get(`${baseURL}/marketers/@${this.props.match.params.nickname}`)
       .then(res => {
         if (res.data.success) {
           this.setState({
