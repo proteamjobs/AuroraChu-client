@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Main from "./pages/Main";
 import Signin from "./pages/Oauth/Signin";
 import Signup from "./pages/Oauth/Signup";
@@ -14,6 +14,8 @@ import { gray } from "ansi-colors";
 import baseURL from "./baseURL";
 import Marketers from "./pages/Marketers";
 import Gate from "./pages/Gate";
+import Privacy from "./pages/Privacy";
+// import { Link } from "ra-ui-materialui";
 
 const { Header, Content, Footer } = Layout;
 
@@ -95,6 +97,7 @@ class App extends Component {
                 <Content>
                   <Switch>
                     <Route exact path="/" component={Main} />
+                    <Route path="/privacy" component={Privacy} />
                     <Route
                       path="/signup"
                       component={() => (
@@ -194,7 +197,7 @@ class App extends Component {
                 </span>
                 <br></br>
                 <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-                  개인정보처리방침
+                  <Link to="/privacy">개인정보처리방침</Link>
                 </span>
               </Footer>
             </Layout>

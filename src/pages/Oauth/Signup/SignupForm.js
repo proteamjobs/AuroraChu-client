@@ -5,6 +5,7 @@ import "./SignupForm.css";
 import axios from "axios";
 import baseURL from "../../../baseURL";
 import handleLogin from "../../../module/Login";
+import { serviceTermsText, collectionText } from "../../../doc/SignUp";
 
 function RegistrationForm(props) {
   const [checkAge, setCheckAge] = useState(false);
@@ -232,8 +233,9 @@ function RegistrationForm(props) {
                 visible={serviceModalVisible}
                 onOk={handleServiceOk}
                 onCancel={handleServiceCancel}
+                style={{ whiteSpace: "pre-line" }}
               >
-                <p>서비스 이용 약관 동의 내용</p>
+                {serviceTermsText}
               </Modal>
             </div>
           )}
@@ -262,8 +264,9 @@ function RegistrationForm(props) {
                 visible={privateInfoModalVisible}
                 onOk={handlePrivateInfoOk}
                 onCancel={handlePrivateInfoCancel}
+                style={{ whiteSpace: "pre-line" }}
               >
-                <p>개인정보 수집 및 이용 동의 내용</p>
+                {collectionText}
               </Modal>
             </div>
           )}
