@@ -225,7 +225,16 @@ function RegistrationForm(props) {
               <Checkbox checked={checkService} onChange={onCheckServiceChange}>
                 서비스 이용 약관 동의 (필수)
               </Checkbox>
-              <Button type="primary" size="small" onClick={showServiceModal}>
+              <Button
+                type="primary"
+                size="small"
+                onClick={showServiceModal}
+                style={{
+                  backgroundColor: "#049f73",
+                  borderColor: "#049f73",
+                  borderRadius: "5px"
+                }}
+              >
                 내용보기
               </Button>
               <Modal
@@ -256,6 +265,11 @@ function RegistrationForm(props) {
                 type="primary"
                 size="small"
                 onClick={showPrivateInfoModal}
+                style={{
+                  backgroundColor: "#049f73",
+                  borderColor: "#049f73",
+                  borderRadius: "5px"
+                }}
               >
                 내용보기
               </Button>
@@ -291,6 +305,11 @@ function RegistrationForm(props) {
             type="primary"
             htmlType="submit"
             className="signup-form-button"
+            style={{
+              backgroundColor: "#049f73",
+              borderColor: "#049f73",
+              borderRadius: "5px"
+            }}
           >
             회원가입
           </Button>
