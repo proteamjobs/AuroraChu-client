@@ -1,11 +1,12 @@
 .login-form-container {
   max-width: 500px;
+
   margin: 0px auto;
-  margin-top: 15vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   padding: 80px 100px;
   border: 0.5px solid #dddddd;
   border-radius: 5px;
-
 }
 .title {
   font-size: 20px;

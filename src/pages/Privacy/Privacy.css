@@ -1,0 +1,9 @@
+.privacy_content_container {
+  border: 1px solid #e8e8e8;
+  padding: 25px;
+}
+
+.privacy_container {
+  max-width: 720px;
+  margin: 30px auto;
+}

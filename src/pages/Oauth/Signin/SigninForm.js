@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { Form, Icon, Input, Button } from "antd";
 import "./SigninForm.css";
 import "antd/dist/antd.css";
-import axios from "axios";
-import baseURL from "../../../baseURL";
 import handleLogin from "../../../module/Login";
 import { withRouter } from "react-router-dom";
 
@@ -65,19 +63,28 @@ class LoginForm extends Component {
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            // style={{
-            //   width: '100%',
-            //   backgroundColor: "#049f73",
-            //   borderColor: "#049f73",
-            //   borderRadius: "5px"
-            // }}
+            style={{
+              backgroundColor: "#049f73",
+              borderColor: "#049f73",
+              borderRadius: "5px"
+            }}
           >
             로그인 하기
           </Button>
         </Form.Item>
         <div className="extra-function-button-wrapper">
-          <Link to="">비밀번호 찾기</Link>
-          <Link to="/signup">회원이 아니신가요?</Link>
+          <Link
+            to="#"
+            onClick={() => {
+              alert("서비스 구현 중 입니다.");
+            }}
+            style={{ color: "#049f73" }}
+          >
+            비밀번호 찾기
+          </Link>
+          <Link to="/signup" style={{ color: "#049f73" }}>
+            회원이 아니신가요?
+          </Link>
         </div>
       </Form>
     );
