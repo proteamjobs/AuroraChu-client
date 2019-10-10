@@ -51,6 +51,17 @@ class MarketerDetail extends Component {
     }
   };
 
+  onClickChat = () => {
+    if (!this.props.userInfo) {
+      alert("로그인 후 이용 가능한 서비스입니다.");
+    } else {
+      this.props.history.push("/chat", {
+        targetUserInfo: this.state.marketer_info,
+        post: this.state.post
+      });
+    }
+  };
+
   render() {
     const { TabPane } = Tabs;
     const { marketer_info, post, reviews, selected_quantity } = this.state;
@@ -148,6 +159,7 @@ class MarketerDetail extends Component {
                       marginRight: 10,
                       fontSize: 15
                     }}
+                    onClick={this.onClickChat}
                   >
                     문의 하기
                   </Button>
