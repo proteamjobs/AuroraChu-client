@@ -10,10 +10,10 @@ import {
   Breadcrumb,
   Modal,
   Upload,
-  Input
+  Input,
+  Rate
 } from "antd";
 import "./Mypage.css";
-import ReactStars from "react-stars";
 import ImgCrop from "antd-img-crop";
 import OrderList from "./OrderList";
 import AddMarketer from "./AddMarketer";
@@ -334,7 +334,12 @@ class Mypage extends Component {
                       </Button>
                     </Modal>
                   </div>
-                  <ReactStars count={5} value={5} edit={false} />
+                  <Rate
+                    allowHalf
+                    disabled
+                    value={this.props.userInfo.avg_star}
+                    style={{ fontSize: "15px" }}
+                  />
                 </div>
                 <Menu
                   mode="inline"
