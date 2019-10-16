@@ -1,22 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
 
-import {
-  Layout,
-  Menu,
-  Avatar,
-  Button,
-  Icon,
-  Breadcrumb,
-  Modal,
-  Upload,
-  Input,
-  Radio,
-  Rate,
-  Spin
-} from "antd";
+import { Button, Icon, Input, Radio, Spin } from "antd";
 import "./businesses.css";
-import ImgCrop from "antd-img-crop";
 import baseURL from "../../baseURL";
 
 const { TextArea } = Input;

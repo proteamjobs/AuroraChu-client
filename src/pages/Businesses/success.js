@@ -1,25 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  Layout,
-  Menu,
-  Avatar,
-  Button,
-  Icon,
-  Breadcrumb,
-  Modal,
-  Upload,
-  Input,
-  Radio,
-  Rate,
-  Spin
-} from "antd";
+import { Button, Icon, Spin } from "antd";
 import "./businesses.css";
-import ImgCrop from "antd-img-crop";
-import baseURL from "../../baseURL";
 
-const { TextArea } = Input;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 class Success extends Component {
@@ -53,6 +37,7 @@ class Success extends Component {
             <img
               src={require("./bridge.png")}
               style={{ width: 500, height: 400 }}
+              alt="image"
             />
             <p style={{ textAlign: "center", fontSize: 24, fontWeight: 400 }}>
               주문이 성공적으로 완료되었습니다!

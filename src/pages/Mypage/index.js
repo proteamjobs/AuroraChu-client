@@ -168,7 +168,7 @@ class Mypage extends Component {
 
   componentDidMount() {
     console.log(this.props);
-    this.getOrders();
+    // this.getOrders();
   }
 
   render() {
