@@ -152,8 +152,23 @@ class Mypage extends Component {
       });
   };
 
+  getOrders = async () => {
+    const token = await sessionStorage.getItem("token");
+
+    fetch(`${baseURL}/businesses`, {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+      });
+  };
+
   componentDidMount() {
     console.log(this.props);
+    this.getOrders();
   }
 
   render() {

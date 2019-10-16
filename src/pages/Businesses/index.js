@@ -31,7 +31,8 @@ class Businesses extends Component {
     value: 1,
     text: "",
     credit: 0,
-    upload: false
+    upload: false,
+    loading: false
   };
 
   onChange = e => {
@@ -53,7 +54,7 @@ class Businesses extends Component {
       requirement: text
     };
 
-    console.log(body);
+    // console.log(body);
 
     if (token) {
       fetch(baseURL + "/businesses", {
@@ -92,7 +93,8 @@ class Businesses extends Component {
       marketerInfo,
       post,
       selected_quantity,
-      upload
+      upload,
+      loading
     } = this.state;
 
     if (upload) {
@@ -195,7 +197,7 @@ class Businesses extends Component {
               style={{ margin: 20 }}
             >
               <Radio value={1}>신용카드</Radio>
-              <Radio value={2}>무통장 입금</Radio>
+              <Radio value={0}>무통장 입금</Radio>
             </Radio.Group>
           </div>
 
@@ -217,8 +219,12 @@ class Businesses extends Component {
             <Button
               style={{ backgroundColor: "gray", fontWeight: "bold" }}
               onClick={() => {
+                this.setState({
+                  loading: true
+                });
                 this.handle_upload();
               }}
+              loading={loading}
             >
               결제하기
             </Button>
