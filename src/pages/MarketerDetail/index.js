@@ -3,6 +3,7 @@ import { Tabs, Spin, Avatar, Button, Rate, Select, Divider, Alert } from "antd";
 import { withRouter } from "react-router-dom";
 import baseURL from "../../baseURL";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const { Option } = Select;
 
 class MarketerDetail extends Component {
@@ -142,8 +143,10 @@ class MarketerDetail extends Component {
                         style={{ width: 120 }}
                         onChange={num => this.selectQuantity(num)}
                       >
-                        {this.renderQuantityOptions(10).map(num => (
-                          <Option value={num}>{num}</Option>
+                        {this.renderQuantityOptions(10).map((num, key) => (
+                          <Option key={key} value={num}>
+                            {num}
+                          </Option>
                         ))}
                       </Select>
                     </div>
@@ -163,12 +166,24 @@ class MarketerDetail extends Component {
                   >
                     문의 하기
                   </Button>
-                  <Button
-                    style={{ width: 160, height: 36, fontSize: 15 }}
-                    onClick={this.onClickBuy}
+                  <Link
+                    to={{
+                      pathname: "/businesses",
+                      state: {
+                        marketer_info: this.state.marketer_info,
+                        post: this.state.post,
+                        user_info: this.props.userInfo,
+                        selected_quantity: this.state.selected_quantity
+                      }
+                    }}
                   >
-                    구매 하기
-                  </Button>
+                    <Button
+                      style={{ width: 160, height: 36, fontSize: 15 }}
+                      onClick={this.onClickBuy}
+                    >
+                      구매 하기
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

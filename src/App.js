@@ -15,6 +15,8 @@ import baseURL from "./baseURL";
 import Marketers from "./pages/Marketers";
 import Gate from "./pages/Gate";
 import Privacy from "./pages/Privacy";
+import Businesses from "./pages/Businesses";
+import BusinessesSuccess from "./pages/Businesses/success";
 // import { Link } from "ra-ui-materialui";
 
 const { Header, Content, Footer } = Layout;
@@ -147,6 +149,19 @@ class App extends Component {
                           getUserData={this.getUserData}
                         ></Mypage>
                       )}
+                    />
+
+                    {/* <Route
+                      path="/businesses"
+                      component={() => (
+                        <Businesses userInfo={this.state.userInfo}></Businesses>
+                      )}
+                    /> */}
+                    <Route exact path="/businesses" component={Businesses} />
+                    <Route
+                      exact
+                      path="/businesses/success"
+                      component={BusinessesSuccess}
                     />
                     {/* <Route
                     path="/marketer/:nickname"
