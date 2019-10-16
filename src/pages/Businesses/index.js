@@ -132,7 +132,16 @@ class Businesses extends Component {
                 <p style={{ width: "15%" }}>주문 금액</p>
               </div>
               <div className="orderTableRow">
-                <p style={{ width: "60%", borderRight: "0.5px solid gray" }}>
+                <p
+                  style={{
+                    width: "60%",
+                    borderRight: "0.5px solid gray",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    wordWrap: "normal"
+                  }}
+                >
                   {post.title}
                 </p>
                 <p style={{ width: "15%", borderRight: "0.5px solid gray" }}>
