@@ -25,8 +25,6 @@ class DeleteUser extends Component {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-
         let data = {
           password: values.password
         };
@@ -40,7 +38,6 @@ class DeleteUser extends Component {
         })
           .then(res => res.json())
           .then(json => {
-            console.log(json);
             if (json.success) {
               sessionStorage.clear();
               window.location.reload();

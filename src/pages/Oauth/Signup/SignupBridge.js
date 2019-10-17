@@ -6,7 +6,6 @@ import bridgeImg from "./bridge.png";
 import "antd/dist/antd.css";
 
 const SignupBridge = props => {
-  console.log(props);
   return (
     <div className="bridge_container">
       <div>

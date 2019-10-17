@@ -18,7 +18,6 @@ class Success extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     this.setState({
       userInfo: this.props.location.state.user_info,
       marketerInfo: this.props.location.state.marketer_info,
@@ -34,11 +33,7 @@ class Success extends Component {
       return (
         <div className="successContent">
           <div>
-            <img
-              src={require("./bridge.png")}
-              style={{ width: 500, height: 400 }}
-              alt="image"
-            />
+            <img src={require("./bridge.png")} style={{ width: 500 }} alt="" />
             <p style={{ textAlign: "center", fontSize: 24, fontWeight: 400 }}>
               주문이 성공적으로 완료되었습니다!
             </p>

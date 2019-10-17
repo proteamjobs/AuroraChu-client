@@ -22,7 +22,6 @@ class Businesses extends Component {
   };
 
   onChange = e => {
-    console.log("radio checked", e.target.value);
     this.setState({
       value: e.target.value
     });
@@ -40,8 +39,6 @@ class Businesses extends Component {
       requirement: text
     };
 
-    // console.log(body);
-
     if (token) {
       fetch(baseURL + "/businesses", {
         method: "POST",
@@ -53,7 +50,6 @@ class Businesses extends Component {
       })
         .then(res => res.json())
         .then(json => {
-          console.log(json);
           if (json.success) {
             this.setState({
               upload: true
@@ -64,7 +60,6 @@ class Businesses extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     this.setState({
       userInfo: this.props.location.state.user_info,
       marketerInfo: this.props.location.state.marketer_info,

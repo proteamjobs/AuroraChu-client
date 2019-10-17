@@ -21,7 +21,7 @@ export default [
   { key: "종교", value: "종교", category: "종교" },
   {
     key: "병원_제약_복지",
-    value: "병원 / 제약 /복지",
+    value: "병원 / 제약 / 복지",
     category: "병원/제약/복지"
   },
   {

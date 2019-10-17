@@ -1,19 +1,5 @@
 import React, { Component } from "react";
-import {
-  // Layout,
-  // Menu,
-  // Spin,
-  // Progress,
-  // Avatar,
-  // Radio,
-  Icon,
-  // Breadcrumb,
-  // Modal,
-  Button,
-  Form,
-  Input,
-  Upload
-} from "antd";
+import { Icon, Button, Upload } from "antd";
 import baseURL from "../../baseURL";
 
 class AddMarketerEdu extends Component {
@@ -33,7 +19,6 @@ class AddMarketerEdu extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.setState({
             status: json.status
@@ -64,7 +49,6 @@ class AddMarketerEdu extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.setState({
             fileList: [],
@@ -86,7 +70,6 @@ class AddMarketerEdu extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.getStatus();
         }

@@ -1,23 +1,8 @@
 import React, { Component } from "react";
-import category from "../../categoryList";
-import {
-  // Layout,
-  // Menu,
-  // Spin,
-  // Progress,
-  // Avatar,
-  // Radio,
-  Icon,
-  // Breadcrumb,
-  // Modal,
-  Button,
-  // Form,
-  Input,
-  Upload,
-  Select,
-  Popconfirm
-} from "antd";
+// import category from "../../categoryList";
+import { Icon, Button, Input, Upload, Select, Popconfirm, message } from "antd";
 import baseURL from "../../baseURL";
+import categoryList from "../../categoryList";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -51,7 +36,6 @@ class AddMarketer extends Component {
       })
         .then(res => res.json())
         .then(async json => {
-          console.log(json);
           if (json.success) {
             await this.setState({
               imageUrl: json.image_url
@@ -69,8 +53,6 @@ class AddMarketer extends Component {
   };
 
   uploadPost(token) {
-    console.log(token);
-
     let { category, avgDuration, title, text, imageUrl } = this.state;
 
     let body = {
@@ -80,7 +62,6 @@ class AddMarketer extends Component {
       image_url: imageUrl,
       avg_duration: avgDuration
     };
-    console.log("body ::: ", body);
 
     fetch(baseURL + "/marketers", {
       method: "POST",
@@ -92,7 +73,6 @@ class AddMarketer extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           alert("등록이 완료되었습니다.");
           this.setState({
@@ -107,7 +87,7 @@ class AddMarketer extends Component {
     const token = await sessionStorage.getItem("token");
 
     let { category, avgDuration, title, text, imageUrl, post } = this.state;
-    console.log(this.state);
+
     let body = {
       category: category === null ? post.category : category,
       title: title.length === 0 ? post.title : title,
@@ -115,7 +95,6 @@ class AddMarketer extends Component {
       image_url: imageUrl === null ? post.image_url : imageUrl,
       avg_duration: avgDuration === null ? post.avg_duration : avgDuration
     };
-    console.log("body ::: ", body);
 
     fetch(baseURL + "/marketers", {
       method: "PUT",
@@ -127,7 +106,6 @@ class AddMarketer extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           alert("수정이 완료되었습니다.");
           this.setState({
@@ -143,7 +121,6 @@ class AddMarketer extends Component {
     fetch(`${baseURL}/Marketers/${user._id}`)
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.setState({
             isMarketer: true,
@@ -169,7 +146,6 @@ class AddMarketer extends Component {
       })
         .then(res => res.json())
         .then(json => {
-          console.log(json);
           if (json.success) {
             // this.getMarketers();
             window.location.reload();
@@ -179,13 +155,11 @@ class AddMarketer extends Component {
   }
 
   confirm(e) {
-    console.log(e);
     this.deleteMarketers();
   }
 
   cancel(e) {
-    console.log(e);
-    // message.error('Click on No');
+    message.error("Click on No");
   }
 
   componentDidMount() {
@@ -252,7 +226,10 @@ class AddMarketer extends Component {
                   .indexOf(input.toLowerCase()) >= 0
               }
             >
-              <Option value="홍보_마케팅">홍보/마케팅</Option>
+              {categoryList.map(item => {
+                return <Option value={item.key}>{item.category}</Option>;
+              })}
+              {/* <Option value="홍보_마케팅">홍보/마케팅</Option>
               <Option value="카페_음료_베이커리">카페/음료/베이커리</Option>
               <Option value="음식점업">음식점업</Option>
               <Option value="교육_서비스업">교육 서비스업</Option>
@@ -270,7 +247,7 @@ class AddMarketer extends Component {
               <Option value="법률_세무_회계">법률/세무/회계</Option>
               <Option value="공공기관_관공서_협회">공공기관/관공서/협회</Option>
               <Option value="기타_전문직_자영업">기타 전문직/자영업</Option>
-              <Option value="학생_기타_개인">학생/기타 개인</Option>
+              <Option value="학생_기타_개인">학생/기타 개인</Option> */}
             </Select>
           </div>
 
@@ -340,7 +317,6 @@ class AddMarketer extends Component {
             <Button
               style={{ width: 134, height: 34, backgroundColor: "#c4c4c4" }}
               onClick={() => {
-                console.log(this.state);
                 if (
                   category !== null &&
                   avgDuration !== null &&
@@ -486,16 +462,6 @@ class AddMarketer extends Component {
               paddingRight: "25%"
             }}
           >
-            {/* <Button
-              style={{ width: 134, height: 34, backgroundColor: "#c4c4c4" }}
-              onClick={() => {
-                console.log(this.state);
-                this.deleteMarketers();
-              }}
-            >
-              삭제하기
-            </Button> */}
-
             <Popconfirm
               title="삭제하시겠습니까?"
               onConfirm={() => this.confirm()}
@@ -505,10 +471,6 @@ class AddMarketer extends Component {
             >
               <Button
                 style={{ width: 134, height: 34, backgroundColor: "#c4c4c4" }}
-                // onClick={() => {
-                //   console.log(this.state);
-                //   this.deleteMarketers();
-                // }}
               >
                 삭제하기
               </Button>

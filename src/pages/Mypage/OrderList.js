@@ -99,7 +99,7 @@ class OrderList extends Component {
   };
 
   callback(key) {
-    console.log(key);
+    // console.log(key);
   }
 
   getOrders = async () => {
@@ -112,7 +112,6 @@ class OrderList extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.editData(json.purchaseList, json.saleList);
         }
