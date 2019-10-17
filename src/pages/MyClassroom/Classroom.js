@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "antd/dist/antd.css";
 import { Redirect } from "react-router-dom";
 import { Layout, Menu, Spin, Progress, Avatar, Button, Radio } from "antd";
+import TestSheet from "../../components/TestSheet";
 import "./Classroom.css";
 import axios from "axios";
 import ReactPlayer from "react-player";
@@ -12,6 +13,7 @@ export class Classroom extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      shouldTestContentOn: false,
       videos: null,
       selectedVideo: null,
       percentage: 0
@@ -40,12 +42,16 @@ export class Classroom extends Component {
     this.handleGetVideos();
   };
 
-  // onClickTestButton = () => {
-  //   let percentage = this.state.percentage;
-  //   if (percentage >= 80) {
-  //     this.props.history.push("/");
-  //   }
-  // };
+  onClickTestButton = () => {
+    let percentage = this.state.percentage;
+    if (percentage >= 80) {
+      this.setState({
+        shouldTestContentOn: true
+      });
+    } else {
+      alert("강의를 80%이상 완료 하셔야 시험 응시가 가능합니다!");
+    }
+  };
 
   onSelectLecture = ({ key }) => {
     let video_id = Number(key);
@@ -54,9 +60,9 @@ export class Classroom extends Component {
     )[0];
 
     this.setState({
+      shouldTestContentOn: false,
       selectedVideo: selectedVideo
     });
-    console.log("222 : ", this.state.selectedVideo);
   };
 
   onVideoComplete = () => {
@@ -93,7 +99,12 @@ export class Classroom extends Component {
   };
 
   render() {
-    const { videos, selectedVideo, percentage } = this.state;
+    const {
+      videos,
+      selectedVideo,
+      percentage,
+      shouldTestContentOn
+    } = this.state;
     let isFreeUser = this.props.userInfo.status >= 2 ? false : true;
     return videos ? (
       <Layout className="container">
@@ -138,7 +149,12 @@ export class Classroom extends Component {
             ))}
           </Menu>
         </Sider>
-        {selectedVideo ? (
+        {shouldTestContentOn && (
+          <Content className="content-wrapper">
+            <TestSheet />
+          </Content>
+        )}
+        {!shouldTestContentOn && selectedVideo && (
           <Content className="content-wrapper">
             <h2 className="margin-bottom-medium">{selectedVideo.title}</h2>
             <div className="player-wrapper margin-bottom-medium">
@@ -167,8 +183,6 @@ export class Classroom extends Component {
               학습완료
             </Button>
           </Content>
-        ) : (
-          "강의를 선택해주세요."
         )}
       </Layout>
     ) : (
