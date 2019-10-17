@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tabs, Spin, Avatar, Button, Rate, Select, Divider, Alert } from "antd";
+import { Tabs, Spin, Avatar, Button, Rate, Select, Divider } from "antd";
 import { withRouter } from "react-router-dom";
 import baseURL from "../../baseURL";
 import axios from "axios";
@@ -65,7 +65,7 @@ class MarketerDetail extends Component {
 
   render() {
     const { TabPane } = Tabs;
-    const { marketer_info, post, reviews, selected_quantity } = this.state;
+    const { marketer_info, post, reviews } = this.state;
 
     return marketer_info && post ? (
       <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
@@ -74,6 +74,7 @@ class MarketerDetail extends Component {
             <img
               src={post.image_url}
               style={{ width: 700, height: 450, marginRight: 40 }}
+              alt=""
             />
           </div>
           <div

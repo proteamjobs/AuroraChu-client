@@ -42,7 +42,6 @@ class Header extends Component {
                 }}
               >
                 <Link to={"/"} style={{ color: "white" }}>
-                  {/* Wake-Up */}
                   <Logo />
                   <span
                     style={{
@@ -65,30 +64,6 @@ class Header extends Component {
                   marginRight: 20
                 }}
               >
-                {/* <Link to={"/myclassroom"}>
-                <div
-                  style={{
-                    marginRight: 20,
-                    color: "black",
-                    fontSize: "0.9375rem"
-                  }}
-                >
-                  나의 강의실
-                </div>
-              </Link>
-
-              <Link to="/marketers">
-                <div
-                  style={{
-                    marginRight: 20,
-                    color: "black",
-                    fontSize: "0.9375rem"
-                  }}
-                >
-                  블로그마케팅
-                </div>
-              </Link> */}
-
                 <Dropdown overlay={menu}>
                   <div className="header_user">
                     <Avatar size={35} src={this.props.userInfo.profile_url} />
@@ -105,17 +80,21 @@ class Header extends Component {
 
           <div className="header_menu">
             <div className="header_wrap">
-              <Link to={"/myclassroom"}>
-                <div
-                  style={{
-                    marginRight: 20,
-                    color: "black",
-                    fontSize: "0.9375rem"
-                  }}
-                >
-                  나의 강의실
-                </div>
-              </Link>
+              <div
+                style={{
+                  marginRight: 20,
+                  color: "black",
+                  fontSize: "0.9375rem"
+                }}
+                onClick={() =>
+                  alert(
+                    "훌륭한 강의를 준비중에 있습니다.\n빠른 시일 내에 곧 찾아뵙겠습니다."
+                  )
+                }
+              >
+                <span style={{ cursor: "pointer" }}> 나의 강의실</span>
+              </div>
+              {/* <Link to={"/myclassroom"}></Link> */}
 
               <Link to="/marketers">
                 <div

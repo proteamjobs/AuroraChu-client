@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Avatar, Rate, Button, Input } from "antd";
 
 export class Chat extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { targetUserInfo, post } = this.props.location.state;
     // if (this.props.userInfo) {

@@ -25,8 +25,6 @@ class FixPassword extends Component {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-
         let data = {
           oldPassword: values.password,
           newPassword: values.newPassword
@@ -41,7 +39,6 @@ class FixPassword extends Component {
         })
           .then(res => res.json())
           .then(json => {
-            console.log(json);
             if (json.success) {
               alert("비밀번호 변경 완료!");
             } else {

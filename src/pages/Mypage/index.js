@@ -108,7 +108,6 @@ class Mypage extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.setState({
             nicknameCheck: null,
@@ -140,7 +139,6 @@ class Mypage extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         if (json.success) {
           this.setState({
             file: null,
@@ -161,15 +159,8 @@ class Mypage extends Component {
       }
     })
       .then(res => res.json())
-      .then(json => {
-        console.log(json);
-      });
+      .then(json => {});
   };
-
-  componentDidMount() {
-    console.log(this.props);
-    // this.getOrders();
-  }
 
   render() {
     const uploadButton = (
@@ -314,6 +305,7 @@ class Mypage extends Component {
                           });
                         }}
                         onSearch={value => {
+                          // eslint-disable-next-line no-useless-escape
                           let pattern = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]+$/;
                           let valueCheck = pattern.exec(value);
                           if (valueCheck !== null) {
@@ -388,18 +380,18 @@ class Mypage extends Component {
                     <Menu.Item
                       key="3"
                       onClick={e => {
-                        // if (this.props.userInfo.status > 3) {
-                        //   this.setState({
-                        //     menuKey: e.key,
-                        //     menuTitle: "마케터 등록/수정"
-                        //   });
-                        // } else {
-                        //   alert("시험을 통과해주세요");
-                        // }
-                        this.setState({
-                          menuKey: e.key,
-                          menuTitle: "마케터 등록/수정"
-                        });
+                        if (this.props.userInfo.status > 3) {
+                          this.setState({
+                            menuKey: e.key,
+                            menuTitle: "마케터 등록/수정"
+                          });
+                        } else {
+                          alert("먼저 마케터 교육을 받으셔야 합니다.");
+                        }
+                        // this.setState({
+                        //   menuKey: e.key,
+                        //   menuTitle: "마케터 등록/수정"
+                        // });
                       }}
                     >
                       마케터 등록/수정

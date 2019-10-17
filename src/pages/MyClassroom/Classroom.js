@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
-import { Redirect } from "react-router-dom";
 import { Layout, Menu, Spin, Progress, Avatar, Button, Radio } from "antd";
 import TestSheet from "../../components/TestSheet";
 import "./Classroom.css";
