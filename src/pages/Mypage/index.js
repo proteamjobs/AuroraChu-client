@@ -380,7 +380,7 @@ class Mypage extends Component {
                     <Menu.Item
                       key="3"
                       onClick={e => {
-                        if (this.props.userInfo.status > 3) {
+                        if (this.props.userInfo.status >= 3) {
                           this.setState({
                             menuKey: e.key,
                             menuTitle: "마케터 등록/수정"
