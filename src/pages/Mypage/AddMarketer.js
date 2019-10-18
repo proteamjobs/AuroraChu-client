@@ -229,25 +229,6 @@ class AddMarketer extends Component {
               {categoryList.map(item => {
                 return <Option value={item.key}>{item.category}</Option>;
               })}
-              {/* <Option value="홍보_마케팅">홍보/마케팅</Option>
-              <Option value="카페_음료_베이커리">카페/음료/베이커리</Option>
-              <Option value="음식점업">음식점업</Option>
-              <Option value="교육_서비스업">교육 서비스업</Option>
-              <Option value="도소매_제조업_유통업">도소매/제조업/유통업</Option>
-              <Option value="예술_스포츠_레저_여가">
-                예술/스포츠/레저/여가
-              </Option>
-              <Option value="미용_뷰티">미용/뷰티</Option>
-              <Option value="종교">종교</Option>
-              <Option value="병원_제약_복지">병원/제약/복지</Option>
-              <Option value="부동산_임대_건설_숙박업">
-                부동산/임대/건설/숙박업
-              </Option>
-              <Option value="금융_보험_투자">금융/보험/투자</Option>
-              <Option value="법률_세무_회계">법률/세무/회계</Option>
-              <Option value="공공기관_관공서_협회">공공기관/관공서/협회</Option>
-              <Option value="기타_전문직_자영업">기타 전문직/자영업</Option>
-              <Option value="학생_기타_개인">학생/기타 개인</Option> */}
             </Select>
           </div>
 
@@ -366,25 +347,9 @@ class AddMarketer extends Component {
                   .indexOf(input.toLowerCase()) >= 0
               }
             >
-              <Option value="홍보_마케팅">홍보/마케팅</Option>
-              <Option value="카페_음료_베이커리">카페/음료/베이커리</Option>
-              <Option value="음식점업">음식점업</Option>
-              <Option value="교육_서비스업">교육 서비스업</Option>
-              <Option value="도소매_제조업_유통업">도소매/제조업/유통업</Option>
-              <Option value="예술_스포츠_레저_여가">
-                예술/스포츠/레저/여가
-              </Option>
-              <Option value="미용_뷰티">미용/뷰티</Option>
-              <Option value="종교">종교</Option>
-              <Option value="병원_제약_복지">병원/제약/복지</Option>
-              <Option value="부동산_임대_건설_숙박업">
-                부동산/임대/건설/숙박업
-              </Option>
-              <Option value="금융_보험_투자">금융/보험/투자</Option>
-              <Option value="법률_세무_회계">법률/세무/회계</Option>
-              <Option value="공공기관_관공서_협회">공공기관/관공서/협회</Option>
-              <Option value="기타_전문직_자영업">기타 전문직/자영업</Option>
-              <Option value="학생_기타_개인">학생/기타 개인</Option>
+              {categoryList.map(item => {
+                return <Option value={item.key}>{item.category}</Option>;
+              })}
             </Select>
           </div>
 
