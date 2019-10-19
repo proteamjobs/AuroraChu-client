@@ -138,7 +138,7 @@ class AddMarketer extends Component {
     const token = await sessionStorage.getItem("token");
 
     if (token) {
-      fetch(`${baseURL}/Marketers/`, {
+      fetch(`${baseURL}/marketers`, {
         method: "DELETE",
         headers: {
           Authorization: `JWT ${token}`
@@ -146,9 +146,14 @@ class AddMarketer extends Component {
       })
         .then(res => res.json())
         .then(json => {
+          console.log(json);
           if (json.success) {
             // this.getMarketers();
             window.location.reload();
+          } else {
+            if (json.error === 1) {
+              alert("거래중인 상품은 삭제할 수 없습니다.");
+            }
           }
         });
     }
