@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css";
 import { Layout, Menu, Spin, Progress, Avatar, Button, Radio } from "antd";
+import { withRouter } from "react-router-dom";
 import TestSheet from "../../components/TestSheet";
 import "./Classroom.css";
 import axios from "axios";
@@ -148,12 +149,13 @@ export class Classroom extends Component {
             ))}
           </Menu>
         </Sider>
-        {shouldTestContentOn && (
+        {!shouldTestContentOn && (
           <Content className="content-wrapper">
-            <TestSheet />
+            <TestSheet history={this.props.history} />
           </Content>
         )}
-        {!shouldTestContentOn && selectedVideo && (
+
+        {shouldTestContentOn && selectedVideo && (
           <Content className="content-wrapper">
             <h2 className="margin-bottom-medium">{selectedVideo.title}</h2>
             <div className="player-wrapper margin-bottom-medium">
@@ -192,4 +194,4 @@ export class Classroom extends Component {
   }
 }
 
-export default Classroom;
+export default withRouter(Classroom);
