@@ -441,7 +441,7 @@ class Mypage extends Component {
                 ) : this.state.menuKey === "2" ? (
                   <AddMarketerEdu />
                 ) : this.state.menuKey === "3" ? (
-                  <AddMarketer user={this.props.userInfo} />
+                  <AddMarketer userInfo={this.props.userInfo} />
                 ) : this.state.menuKey === "4" ? (
                   <FixMarketerInfo />
                 ) : this.state.menuKey === "5" ? (
