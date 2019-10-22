@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tabs, Spin, Avatar, Button, Rate, Select, Divider } from "antd";
+import { Tabs, Spin, Avatar, Button, Rate, Select, Divider, Empty } from "antd";
 import { withRouter } from "react-router-dom";
 import baseURL from "../../baseURL";
 import axios from "axios";
@@ -254,13 +254,15 @@ class MarketerDetail extends Component {
             <TabPane tab="실 구매자 후기" key="3">
               {reviews.length ? (
                 <div style={{ marginTop: 10 }}>
-                  <div
+                  <h4
                     style={{
-                      marginBottom: 20
+                      marginBottom: 20,
+                      textAlign: "center"
                     }}
                   >
                     이 마케터와 실제 진행했던 소중한 후기 입니다.
-                  </div>
+                  </h4>
+
                   <Divider />
                   {reviews.map(review => (
                     <div>
@@ -295,7 +297,15 @@ class MarketerDetail extends Component {
                   ))}
                 </div>
               ) : (
-                <div>리뷰가 없습니다.</div>
+                // <div>리뷰가 없습니다.</div>
+                <>
+                  <Divider />
+                  <Empty
+                    description={<span>아직 리뷰가 없습니다.</span>}
+                    style={{ margin: "70px auto" }}
+                  />
+                  <Divider />
+                </>
               )}
             </TabPane>
           </Tabs>
