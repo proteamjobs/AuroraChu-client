@@ -67,6 +67,31 @@ class MarketerDetail extends Component {
     const { TabPane } = Tabs;
     const { marketer_info, post, reviews } = this.state;
 
+    const btnBuy = !this.props.userInfo ? (
+      <Button
+        style={{ width: 160, height: 36, fontSize: 15 }}
+        onClick={this.onClickBuy}
+      >
+        구매 하기
+      </Button>
+    ) : (
+      <Link
+        to={{
+          pathname: "/businesses",
+          state: {
+            marketer_info: this.state.marketer_info,
+            post: this.state.post,
+            user_info: this.props.userInfo,
+            selected_quantity: this.state.selected_quantity
+          }
+        }}
+      >
+        <Button style={{ width: 160, height: 36, fontSize: 15 }}>
+          구매 하기
+        </Button>
+      </Link>
+    );
+
     return marketer_info && post ? (
       <div style={{ display: "flex", flexDirection: "column", marginTop: 30 }}>
         <div style={{ display: "flex" }}>
@@ -167,24 +192,8 @@ class MarketerDetail extends Component {
                   >
                     문의 하기
                   </Button>
-                  <Link
-                    to={{
-                      pathname: "/businesses",
-                      state: {
-                        marketer_info: this.state.marketer_info,
-                        post: this.state.post,
-                        user_info: this.props.userInfo,
-                        selected_quantity: this.state.selected_quantity
-                      }
-                    }}
-                  >
-                    <Button
-                      style={{ width: 160, height: 36, fontSize: 15 }}
-                      onClick={this.onClickBuy}
-                    >
-                      구매 하기
-                    </Button>
-                  </Link>
+
+                  {btnBuy}
                 </div>
               </div>
             </div>
