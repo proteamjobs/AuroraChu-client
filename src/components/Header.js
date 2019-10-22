@@ -14,7 +14,37 @@ class Header extends Component {
         style={{ width: "140px", paddingLeft: "10px" }}
       />
     );
+
     if (this.props.userInfo !== null) {
+      const linkMyClassRoom =
+        this.props.userInfo.status >= 8 ? (
+          <Link to={"/myclassroom"}>
+            <div
+              style={{
+                marginRight: 20,
+                color: "black",
+                fontSize: "0.9375rem"
+              }}
+            >
+              <span style={{ cursor: "pointer" }}> 나의 강의실</span>
+            </div>
+          </Link>
+        ) : (
+          <div
+            style={{
+              marginRight: 20,
+              color: "black",
+              fontSize: "0.9375rem"
+            }}
+            onClick={() =>
+              alert(
+                "훌륭한 강의를 준비중에 있습니다.\n빠른 시일 내에 곧 찾아뵙겠습니다."
+              )
+            }
+          >
+            <span style={{ cursor: "pointer" }}> 나의 강의실</span>
+          </div>
+        );
       const menu = (
         <Menu>
           <Menu.Item>
@@ -80,21 +110,7 @@ class Header extends Component {
 
           <div className="header_menu">
             <div className="header_wrap">
-              <div
-                style={{
-                  marginRight: 20,
-                  color: "black",
-                  fontSize: "0.9375rem"
-                }}
-                onClick={() =>
-                  alert(
-                    "훌륭한 강의를 준비중에 있습니다.\n빠른 시일 내에 곧 찾아뵙겠습니다."
-                  )
-                }
-              >
-                <span style={{ cursor: "pointer" }}> 나의 강의실</span>
-              </div>
-              {/* <Link to={"/myclassroom"}></Link> */}
+              {linkMyClassRoom}
 
               <Link to="/marketers">
                 <div
