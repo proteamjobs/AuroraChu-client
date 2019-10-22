@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Icon, Button, Input, Upload, Select, Popconfirm, message } from "antd";
 import baseURL from "../../baseURL";
 import categoryList from "../../categoryList";
+import { white } from "ansi-colors";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -214,11 +215,11 @@ class AddMarketer extends Component {
         >
           <div className="addMarketerTitle">마케터 등록/수정</div>
           <div className="selecter">
-            <p>카테고리</p>
+            <p>전문 분야</p>
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder="카테고리를 선택하세요."
+              placeholder="전문 분야를 선택하세요."
               optionFilterProp="children"
               onChange={value => {
                 this.setState({
@@ -238,11 +239,11 @@ class AddMarketer extends Component {
           </div>
 
           <div className="selecter">
-            <p>평균 소요일</p>
+            <p>작업 평균 소요일</p>
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder="평균 소요일을 선택하세요."
+              placeholder="작업 평균 소요일을 선택하세요."
               optionFilterProp="children"
               onChange={value => {
                 this.setState({
@@ -277,7 +278,7 @@ class AddMarketer extends Component {
           <div className="selecter">
             <p>타이틀</p>
             <Input
-              placeholder="타이틀을 작성해주세요."
+              placeholder="마케터 리스트에 노출되는 상품명 입니다."
               onChange={e => {
                 this.setState({
                   title: e.target.value
@@ -301,7 +302,13 @@ class AddMarketer extends Component {
 
           <div style={{ textAlign: "center", marginTop: 50 }}>
             <Button
-              style={{ width: 134, height: 34, backgroundColor: "#c4c4c4" }}
+              style={{
+                width: 134,
+                height: 34,
+                backgroundColor: "#049f73",
+                borderColor: "#049f73",
+                color: "white"
+              }}
               onClick={() => {
                 if (
                   category !== null &&
@@ -334,12 +341,12 @@ class AddMarketer extends Component {
         >
           <div className="addMarketerTitle">마케터 등록/수정</div>
           <div className="selecter">
-            <p>카테고리</p>
+            <p>전문 분야</p>
+            <></>
             <Select
               showSearch
               style={{ width: 200 }}
-              // value={post.category}
-              placeholder={post.category}
+              defaultValue={post.category}
               optionFilterProp="children"
               onChange={value => {
                 this.setState({
@@ -359,12 +366,12 @@ class AddMarketer extends Component {
           </div>
 
           <div className="selecter">
-            <p>평균 소요일</p>
+            <p>작업 평균 소요일</p>
+            <></>
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder={post.avg_duration}
-              // value={post.avg_duration}
+              defaultValue={post.avg_duration}
               optionFilterProp="children"
               onChange={value => {
                 this.setState({
@@ -398,9 +405,10 @@ class AddMarketer extends Component {
 
           <div className="selecter">
             <p>타이틀</p>
+
+            <></>
             <Input
-              placeholder={post.title}
-              // value={post.title}
+              defaultValue={post.title}
               onChange={e => {
                 this.setState({
                   title: e.target.value
@@ -413,13 +421,13 @@ class AddMarketer extends Component {
             <p>상세 설명</p>
             <TextArea
               style={{ height: 213 }}
-              // value={post.content}
-              placeholder={post.content}
               onChange={e => {
                 this.setState({
                   text: e.target.value
                 });
+                console.log(this.state.text);
               }}
+              defaultValue={post.content}
             />
           </div>
 
@@ -440,7 +448,13 @@ class AddMarketer extends Component {
               cancelText="No"
             >
               <Button
-                style={{ width: 134, height: 34, backgroundColor: "#c4c4c4" }}
+                style={{
+                  width: 134,
+                  height: 34,
+                  backgroundColor: "#049f73",
+                  borderColor: "#049f73",
+                  color: "white"
+                }}
               >
                 삭제하기
               </Button>
@@ -454,7 +468,13 @@ class AddMarketer extends Component {
               cancelText="No"
             >
               <Button
-                style={{ width: 134, height: 34, backgroundColor: "#c4c4c4" }}
+                style={{
+                  width: 134,
+                  height: 34,
+                  backgroundColor: "#049f73",
+                  borderColor: "#049f73",
+                  color: "white"
+                }}
               >
                 수정하기
               </Button>
