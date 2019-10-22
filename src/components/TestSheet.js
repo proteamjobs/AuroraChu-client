@@ -122,6 +122,7 @@ class TestSheet extends Component {
             <img
               src={require("./bridge.png")}
               style={{ width: 700, height: 450 }}
+              alt=""
             />
             <div style={{ textAlign: "center", marginBottom: 20 }}>
               <div>마케터가 되기 위한 마지막 관문 입니다.</div>
@@ -193,6 +194,7 @@ class TestSheet extends Component {
                 <img
                   src={require("./bridge.png")}
                   style={{ width: 700, height: 450 }}
+                  alt=""
                 />
                 <div
                   style={{
@@ -236,6 +238,7 @@ class TestSheet extends Component {
                 <img
                   src={require("./bridge.png")}
                   style={{ width: 700, height: 450 }}
+                  alt=""
                 />
                 <div
                   style={{
