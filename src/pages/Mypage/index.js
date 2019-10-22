@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
+import { withRouter } from "react-router-dom";
 
 import {
   Layout,
@@ -459,4 +460,4 @@ class Mypage extends Component {
   }
 }
 
-export default Mypage;
+export default withRouter(Mypage);

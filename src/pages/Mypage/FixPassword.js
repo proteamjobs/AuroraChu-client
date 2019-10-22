@@ -14,6 +14,7 @@ import {
   Input
 } from "antd";
 import baseURL from "../../baseURL";
+import { withRouter } from "react-router-dom";
 
 class FixPassword extends Component {
   state = {
@@ -40,9 +41,10 @@ class FixPassword extends Component {
           .then(res => res.json())
           .then(json => {
             if (json.success) {
-              alert("비밀번호 변경 완료!");
+              alert("성공적으로 비밀번호를 변경하였습니다.");
+              this.props.history.push("/");
             } else {
-              alert("실패하였습니다. 다시 시도해주세요!");
+              alert("기존 비밀번호를 잘못 입력하셨습니다.");
             }
           });
       }
@@ -120,4 +122,4 @@ class FixPassword extends Component {
 
 const WrappedApp = Form.create({ name: "coordinated" })(FixPassword);
 
-export default WrappedApp;
+export default withRouter(WrappedApp);
