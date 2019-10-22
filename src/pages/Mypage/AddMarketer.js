@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Icon, Button, Input, Upload, Select, Popconfirm, message } from "antd";
 import baseURL from "../../baseURL";
 import categoryList from "../../categoryList";
-import { white } from "ansi-colors";
+import { withRouter } from "react-router-dom";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -79,7 +79,9 @@ class AddMarketer extends Component {
           this.setState({
             isMarketer: true
           });
-          this.getMarketers();
+          this.props.history.push(
+            `/marketers/@${this.props.userInfo.nickname}`
+          );
         }
       });
   }
@@ -112,13 +114,16 @@ class AddMarketer extends Component {
           this.setState({
             isMarketer: true
           });
-          this.getMarketers();
+          // this.getMarketers();
+          this.props.history.push(
+            `/marketers/@${this.props.userInfo.nickname}`
+          );
         }
       });
   }
 
   getMarketers() {
-    let user = this.props.user;
+    let user = this.props.userInfo;
     fetch(`${baseURL}/Marketers/${user._id}`)
       .then(res => res.json())
       .then(json => {
@@ -488,4 +493,4 @@ class AddMarketer extends Component {
   }
 }
 
-export default AddMarketer;
+export default withRouter(AddMarketer);
