@@ -31,7 +31,7 @@ class Marketers extends Component {
       await this.setState({
         categoryKey: "전체_업종"
       });
-      this.props.history.push("/marketers");
+      // this.props.history.push("/marketers");
     }
     this.handleGetList(1);
   };

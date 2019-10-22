@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Pagination, Card, List, Rate } from "antd";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./Marketers.css";
 
@@ -84,4 +84,4 @@ class MarketersList extends Component {
   }
 }
 
-export default MarketersList;
+export default withRouter(MarketersList);
