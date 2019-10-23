@@ -44,12 +44,12 @@ export class Classroom extends Component {
 
   onClickTestButton = () => {
     let percentage = this.state.percentage;
-    if (percentage >= 80) {
+    if (percentage >= 90) {
       this.setState({
         shouldTestContentOn: true
       });
     } else {
-      alert("강의를 80%이상 완료 하셔야 시험 응시가 가능합니다!");
+      alert("강의를 90%이상 완료 하셔야 시험 응시가 가능합니다!");
     }
   };
 
@@ -149,13 +149,18 @@ export class Classroom extends Component {
             ))}
           </Menu>
         </Sider>
-        {!shouldTestContentOn && (
+        {shouldTestContentOn && (
           <Content className="content-wrapper">
-            <TestSheet history={this.props.history} />
+            <TestSheet
+              history={this.props.history}
+              gobackToVideos={() =>
+                this.setState({ shouldTestContentOn: false })
+              }
+            />
           </Content>
         )}
 
-        {shouldTestContentOn && selectedVideo && (
+        {!shouldTestContentOn && selectedVideo && (
           <Content className="content-wrapper">
             <h2 className="margin-bottom-medium">{selectedVideo.title}</h2>
             <div className="player-wrapper margin-bottom-medium">
